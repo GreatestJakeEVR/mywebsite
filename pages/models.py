@@ -49,7 +49,6 @@ class HomePage(Page):
         FieldPanel("headline"),
         FieldPanel("introduction"),
         FieldPanel("portrait"),
-        FieldPanel("about"),
         FieldPanel("github_url"),
         FieldPanel("contact_email"),
     ]

@@ -11,8 +11,8 @@
   <meta property="og:description" content="{% firstof page.search_description page.introduction 'Software, making things, and family recipes.' %}">
   <meta property="og:type" content="{% block og_type %}website{% endblock %}">
   <meta name="theme-color" content="#183c3b">
-  <link rel="icon" href="{% static 'images/favicon.ico' %}">
-  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'images/JA_logo_favicon.ico' %}">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}?v=2">
   <script src="{% static 'js/site.js' %}" defer></script>
   {% block extra_head %}{% endblock %}
 </head>
@@ -20,7 +20,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="shell header-inner">
-      <a class="brand" href="/" aria-label="Jake Ardoin home"><span class="brand-mark">ja<span>.</span></span><span>Jake Ardoin</span></a>
+      <a class="brand" href="/" aria-label="Jake Ardoin home"><img class="brand-logo" src="{% static 'images/JA_logo.png' %}" alt="" width="250" height="225"><span>Jake Ardoin</span></a>
       <nav aria-label="Main navigation">
         <a href="/" {% if page == site_home %}aria-current="page"{% endif %}>Home</a>
         {% for item in site_navigation %}<a href="{% pageurl item %}" {% if page.url_path == item.url_path or item.url_path in page.url_path %}aria-current="page"{% endif %}>{{ item.title }}</a>{% endfor %}

@@ -27,7 +27,6 @@ class Command(BaseCommand):
                 slug="jake-ardoin",
                 seo_title="Jake Ardoin — Developer, maker & home cook",
                 search_description="Software, 3D printing, and Cajun family recipes. A personal corner of the internet by Jake Ardoin.",
-                about="<p>I like figuring out how things work, then making something of my own. That curiosity takes me from writing software to experimenting with 3D printing and trying things in the kitchen.</p><p>This site brings those interests together: a place for useful notes, personal projects, and family recipes I want to keep close.</p>",
             )
             portrait_path = settings.BASE_DIR / "static/images/jake-ardoin.png"
             with portrait_path.open("rb") as source:

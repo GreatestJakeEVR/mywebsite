@@ -8,7 +8,7 @@
       <p class="eyebrow"><span class="small-dot"></span>{{ page.eyebrow }}</p>
       <h1>{{ page.headline|linebreaksbr }}</h1>
       <p class="hero-intro">{{ page.introduction }}</p>
-      <div class="actions"><a class="button" href="#explore">Explore my corner <span aria-hidden="true">↗</span></a><a class="text-link" href="#about">A little about me <span aria-hidden="true">↓</span></a></div>
+      <div class="actions"><a class="button" href="#explore">Explore my corner <span aria-hidden="true">↗</span></a></div>
     </div>
     <div class="portrait-composition">
       <div class="portrait-frame">{% if page.portrait %}{% image page.portrait fill-560x640 alt="Jake Ardoin" class="portrait" %}{% else %}<img class="portrait" src="{% static 'images/jake-ardoin.png' %}" alt="Jake Ardoin" width="390" height="365">{% endif %}</div>
@@ -17,10 +17,6 @@
     </div>
   </div>
   <div class="shell hero-bottom"><span>CODE &nbsp; / &nbsp; CURIOSITY &nbsp; / &nbsp; CAJUN COOKING</span><a href="#explore">Keep exploring <span aria-hidden="true">↓</span></a></div>
-</section>
-<section class="shell section" id="about">
-  <div class="section-heading"><p class="eyebrow">A FEW THINGS ABOUT ME</p><h2>Different interests.<br>The same curiosity.</h2></div>
-  <div class="about-grid"><div class="prose">{{ page.about|richtext }}</div><div class="interests"><div><span class="index-number">01</span><div><h3>Writing software</h3><p>Turning ideas into useful tools.</p></div></div><div><span class="index-number">02</span><div><h3>Making things</h3><p>Learning by doing, one print at a time.</p></div></div><div><span class="index-number">03</span><div><h3>Keeping recipes</h3><p>Good food. Family stories. Another helping.</p></div></div></div></div>
 </section>
 <section class="shell section explore-section" id="explore">
   <div class="section-heading inline"><div><p class="eyebrow">TAKE A LOOK AROUND</p><h2>From my desk to the kitchen.</h2></div><span class="tiny-note">A few things worth sharing.</span></div>

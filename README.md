@@ -20,7 +20,7 @@ On macOS/Linux, activate with `source .venv/bin/activate`; the other commands ar
 
 ## Writing and editing
 
-- **Homepage:** Pages → Jake Ardoin → Edit. Update the introduction, portrait, about text, GitHub link, and optional contact email.
+- **Homepage:** Pages → Jake Ardoin → Edit. Update the introduction, portrait, GitHub link, and optional contact email.
 - **Blog:** Pages → Jake Ardoin → Blog → Add child page → Blog page. Add paragraphs, headings, images with descriptions, code examples, or quotes. Save a draft, preview it, then publish.
 - **Cookbook:** Add a Recipe page under Cookbook. Enter one ingredient and one instruction per line. Categories drive the filter automatically. Add a photo, author, servings, times, and notes as available.
 - **Images:** Upload using the editor or Images section. Local files go into the ignored `media/` directory. Production stores originals privately in S3 and serves generated sizes from CloudFront.
