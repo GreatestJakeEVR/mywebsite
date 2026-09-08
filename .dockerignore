@@ -1,2 +1,12 @@
 .git
-.gitignore
+.venv
+__pycache__
+*.pyc
+.env*
+*.sqlite3*
+media
+staticfiles
+.ruff_cache
+backups
+tests
+docs

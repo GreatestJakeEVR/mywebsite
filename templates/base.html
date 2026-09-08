@@ -1,0 +1,37 @@
+{% load static wagtailcore_tags %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% firstof page.seo_title page.title "Jake Ardoin" %}{% if page and page != site_home %} · Jake Ardoin{% endif %}{% endblock %}</title>
+  <meta name="description" content="{% firstof page.search_description page.introduction 'Software, making things, and Cajun family recipes by Jake Ardoin.' %}">
+  {% if page %}<link rel="canonical" href="{{ page.full_url }}">{% endif %}
+  <meta property="og:title" content="{% firstof page.seo_title page.title 'Jake Ardoin' %}">
+  <meta property="og:description" content="{% firstof page.search_description page.introduction 'Software, making things, and family recipes.' %}">
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+  <meta name="theme-color" content="#183c3b">
+  <link rel="icon" href="{% static 'images/favicon.ico' %}">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  <script src="{% static 'js/site.js' %}" defer></script>
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="/" aria-label="Jake Ardoin home"><span class="brand-mark">ja<span>.</span></span><span>Jake Ardoin</span></a>
+      <nav aria-label="Main navigation">
+        <a href="/" {% if page == site_home %}aria-current="page"{% endif %}>Home</a>
+        {% for item in site_navigation %}<a href="{% pageurl item %}" {% if page.url_path == item.url_path or item.url_path in page.url_path %}aria-current="page"{% endif %}>{{ item.title }}</a>{% endfor %}
+        {% if site_home.github_url %}<a class="nav-github" href="{{ site_home.github_url }}">GitHub <span aria-hidden="true">↗</span></a>{% endif %}
+      </nav>
+    </div>
+  </header>
+  <main id="main">{% block content %}{% endblock %}</main>
+  <footer class="site-footer shell">
+    <div><a class="footer-name" href="/">Jake Ardoin<span>.</span></a><p>A personal corner of the internet.</p></div>
+    <div class="footer-links">{% if site_home.contact_email %}<a href="mailto:{{ site_home.contact_email }}">Say hello ↗</a>{% endif %}{% if site_home.github_url %}<a href="{{ site_home.github_url }}">GitHub ↗</a>{% endif %}<span>© {% now "Y" %} Jake Ardoin</span></div>
+  </footer>
+</body>
+</html>
