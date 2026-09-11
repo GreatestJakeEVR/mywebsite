@@ -52,14 +52,14 @@ This replaces live content with the chosen backup and loses changes made after t
 bash deploy/compose.sh exec -T db pg_restore -U website -d website --clean --if-exists --no-owner --single-transaction --exit-on-error < backups/YOUR_BACKUP.dump
 ```
 
-6. Check out the matching code revision if necessary with `git checkout COMMIT_SHA`, replacing COMMIT_SHA with the recorded full revision. Do not assume any old code works with any newer schema.
-7. Run `bash deploy/release.sh`. This rebuilds that revision, recreates the cache table if needed, runs any required migrations, and restarts the app.
-8. Clear restored sessions and cached login state so old sessions from the backup cannot be reused:
+6. Before restarting the web service, remove all restored sessions so old cookies from the backup cannot be reused:
 
 ```bash
-bash deploy/compose.sh run --rm web python manage.py shell -c 'from django.contrib.sessions.models import Session; from django.core.cache import cache; Session.objects.all().delete(); cache.clear()'
+bash deploy/compose.sh exec -T db psql -U website -d website -c 'DELETE FROM django_session;'
 ```
 
+7. Check out the matching code revision if necessary with `git checkout COMMIT_SHA`, replacing COMMIT_SHA with the recorded full revision. Do not assume any old code works with any newer schema.
+8. Run `bash deploy/release.sh`. This rebuilds that revision, recreates the cache table if needed, runs any required migrations, and restarts the app.
 9. Verify content, image delivery, and both keys. Review user accounts and remove credentials that should no longer exist. Re-register replacement keys if the restored backup predates their enrollment.
 10. Restart the backup timer and restore the cron lines: `systemctl start website-backup.timer`, then `crontab -e`. Make a new successful backup.
 

@@ -1,14 +1,19 @@
 """Real signed WebAuthn ceremonies using an ephemeral software test credential."""
 
 import hashlib
+import io
 import json
 import os
 import time
+from unittest.mock import patch
 
 from allauth.mfa.models import Authenticator
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import ec
 from django.contrib.auth import get_user_model
+from django.contrib.sessions.models import Session
+from django.core.management import call_command
+from django.core.management.base import CommandError
 from django.test import TestCase, override_settings
 from fido2.cose import ES256
 from fido2.utils import websafe_encode
@@ -119,6 +124,27 @@ class SecurityTests(TestCase):
         payload["response"]["signature"] = websafe_encode(b"invalid signature")
         self.client.post(VERIFY, {"credential": json.dumps(payload)})
         self.assertEqual(self.client.get("/admin/").status_code, 302)
+
+    def test_recovery_requires_explicit_flag(self):
+        self.enroll()
+        with self.assertRaises(CommandError):
+            call_command("recover_editor", self.user.username)
+        self.assertTrue(Authenticator.objects.filter(user=self.user).exists())
+
+    def test_recovery_changes_password_revokes_keys_and_sessions(self):
+        self.enroll()
+        self.verify()
+        password = "Replacement-password-only-for-tests-729!"
+        with patch(
+            "security.management.commands.recover_editor.getpass.getpass", return_value=password
+        ):
+            call_command(
+                "recover_editor", self.user.username, confirm_reset=True, stdout=io.StringIO()
+            )
+        self.user.refresh_from_db()
+        self.assertTrue(self.user.check_password(password))
+        self.assertFalse(Authenticator.objects.filter(user=self.user).exists())
+        self.assertFalse(Session.objects.exists())
 
     def test_password_alone_cannot_open_editor_or_manage_keys(self):
         self.password_login()
