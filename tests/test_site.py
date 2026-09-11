@@ -152,9 +152,10 @@ class WebsiteTests(TestCase):
             "editor", "editor@example.com", "test-only-strong-password"
         )
         self.client.force_login(user)
-        self.assertEqual(self.client.get(f"/admin/pages/{self.post.pk}/edit/").status_code, 200)
-        self.assertEqual(self.client.get(f"/admin/pages/{self.recipe.pk}/edit/").status_code, 200)
-        self.assertEqual(self.client.get("/admin/images/").status_code, 200)
+        # Even a Django-authenticated superuser must complete security-key MFA.
+        self.assertEqual(self.client.get(f"/admin/pages/{self.post.pk}/edit/").status_code, 302)
+        self.assertEqual(self.client.get(f"/admin/pages/{self.recipe.pk}/edit/").status_code, 302)
+        self.assertEqual(self.client.get("/admin/images/").status_code, 302)
 
     def test_health_and_database_failure(self):
         self.assertEqual(self.client.get("/health/").json(), {"status": "ok"})

@@ -19,3 +19,5 @@ htmlcov/
 *.log
 backups/
 .deploy.lock
+.release-tag
+.release-tag.tmp

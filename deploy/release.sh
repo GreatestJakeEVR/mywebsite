@@ -16,8 +16,11 @@ chmod 700 backups
 backup_file="backups/pre-release-$(date -u +%Y%m%dT%H%M%SZ).dump"
 (umask 077; "${compose[@]}" exec -T db pg_dump -U website -d website -Fc > "$backup_file")
 "${compose[@]}" run --rm web python manage.py check --deploy --fail-level WARNING
+"${compose[@]}" run --rm web python manage.py createcachetable
 "${compose[@]}" run --rm web python manage.py migrate --noinput
 "${compose[@]}" up -d --wait --wait-timeout 180 web
 "${compose[@]}" up -d caddy
+printf '%s\n' "$RELEASE_TAG" > .release-tag.tmp
+mv .release-tag.tmp .release-tag
 echo "Released ${RELEASE_TAG}. Backup: ${backup_file}"
 echo "Verify HTTPS and /health/ after the domain resolves. Run bootstrap_site only on first setup."

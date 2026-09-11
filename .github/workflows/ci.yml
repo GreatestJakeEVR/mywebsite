@@ -34,3 +34,35 @@ jobs:
       - run: python manage.py test tests --noinput
       - run: python manage.py collectstatic --noinput --settings=config.settings.build
       - run: docker build -t jake-ardoin:ci .
+      - run: bash -n deploy/release.sh deploy/compose.sh deploy/backup.sh
+      - run: pip install cfn-lint==1.56.3
+      - run: cfn-lint deploy/media.cloudformation.yaml deploy/server.cloudformation.yaml
+      - name: Start production container against PostgreSQL
+        env:
+          RELEASE_TAG: ci
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import secrets
+          text = Path('.env.production.example').read_text()
+          text = text.replace('REPLACE_WITH_A_RANDOM_SECRET_AT_LEAST_50_CHARACTERS_LONG', secrets.token_hex(40))
+          text = text.replace('REPLACE_WITH_RANDOM_HEX', secrets.token_hex(24))
+          text = text.replace('REPLACE_WITH_MEDIA_BUCKET', 'ci-placeholder-media')
+          text = text.replace('REPLACE_WITH_BACKUP_BUCKET', 'ci-placeholder-backup')
+          text = text.replace('REPLACE_WITH_DISTRIBUTION_DOMAIN', 'example.cloudfront.net')
+          Path('.env.production').write_text(text)
+          PY
+          bash deploy/compose.sh up -d --wait db
+          bash deploy/compose.sh run --rm web python manage.py check --deploy --fail-level WARNING
+          bash deploy/compose.sh run --rm web python manage.py migrate --noinput
+          bash deploy/compose.sh run --rm web python manage.py createcachetable
+          bash deploy/compose.sh up -d --wait --wait-timeout 180 web
+      - name: Stop test containers
+        if: always()
+        env:
+          RELEASE_TAG: ci
+        run: |
+          if [ -f .env.production ]; then
+            bash deploy/compose.sh logs --tail=50 web
+            bash deploy/compose.sh down -v
+          fi

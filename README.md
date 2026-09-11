@@ -18,6 +18,8 @@ python manage.py runserver
 
 On macOS/Linux, activate with `source .venv/bin/activate`; the other commands are the same. Open `http://localhost:8000` for the site and `/admin/` for Wagtail. The admin password is one you choose; there are no built-in credentials. Omit `--recipes` for an empty cookbook. Bootstrap can be repeated without overwriting your pages.
 
+The editor requires password + physical security-key verification. Enroll your everyday and backup YubiKeys on first setup. Use `localhost`, not `127.0.0.1`, for local key enrollment; production uses `https://www.jakeardoin.com` and needs separate enrollment. See the [complete Wagtail walkthrough](docs/wagtail-guide.md).
+
 ## Writing and editing
 
 - **Homepage:** Pages → Jake Ardoin → Edit. Update the introduction, portrait, GitHub link, and optional contact email.
@@ -71,3 +73,5 @@ Local development uses SQLite. Set `DATABASE_URL` to use PostgreSQL; GitHub Acti
 ## Publish on AWS
 
 Follow [the AWS deployment guide](docs/aws-deployment.md). The repository contains configuration, not a provisioned AWS environment. First-time setup requires an AWS account, server, domain DNS access, secrets, and storage. No cloud resources are created by cloning or running the site locally.
+
+The guide uses EC2 with AWS Session Manager, two-key MFA setup, private S3/CloudFront storage, daily backups, and exact first-release commands. Read the [security boundaries and recovery procedures](docs/security-and-recovery.md) before launch. The public website stays public; management access requires the protected login.

@@ -1,0 +1,8 @@
+body { margin: 0; padding: 3rem 1rem; background: #eeece7; color: #292532; font: 1rem/1.6 system-ui, sans-serif; }
+main { max-width: 38rem; margin: auto; background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 1rem 4rem #29253212; }
+a { color: #685027; }
+input { box-sizing: border-box; max-width: 100%; padding: .65rem; border: 1px solid #887f73; border-radius: .3rem; }
+label { display: block; }
+button { padding: .75rem 1.1rem; background: #292532; color: white; border: 0; border-radius: .35rem; cursor: pointer; margin: .3rem .2rem .3rem 0; }
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid #af852b; outline-offset: 3px; }
+.errorlist { color: #9b2525; }

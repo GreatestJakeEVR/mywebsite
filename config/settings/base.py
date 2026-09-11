@@ -5,6 +5,10 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 INSTALLED_APPS = [
+    "security.apps.SecurityConfig",
+    "allauth",
+    "allauth.account",
+    "allauth.mfa",
     "pages",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
@@ -35,6 +39,8 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
+    "security.middleware.EditorSecurityMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
@@ -98,3 +104,32 @@ WAGTAILDOCS_SERVE_METHOD = "serve_view"
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10_000
 EMAIL_BACKEND = os.getenv("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "webmaster@jakeardoin.com")
+
+AUTHENTICATION_BACKENDS = ["allauth.account.auth_backends.AuthenticationBackend"]
+LOGIN_URL = "account_login"
+LOGIN_REDIRECT_URL = "/admin/"
+ACCOUNT_LOGOUT_REDIRECT_URL = "/"
+ACCOUNT_ADAPTER = "security.adapters.EditorAccountAdapter"
+ACCOUNT_LOGIN_METHODS = {"username"}
+ACCOUNT_SIGNUP_FIELDS = ["username*", "email*", "password1*", "password2*"]
+ACCOUNT_EMAIL_VERIFICATION = "none"  # Accounts are provisioned on the server only.
+ACCOUNT_LOGIN_BY_CODE_ENABLED = False
+ACCOUNT_SESSION_REMEMBER = False
+ACCOUNT_LOGIN_TIMEOUT = 300
+ACCOUNT_REAUTHENTICATION_TIMEOUT = 300
+ACCOUNT_LOGOUT_ON_GET = False
+MFA_ADAPTER = "security.adapters.SecurityKeyAdapter"
+MFA_SUPPORTED_TYPES = ["webauthn"]
+MFA_PASSKEY_LOGIN_ENABLED = False
+MFA_PASSKEY_SIGNUP_ENABLED = False
+MFA_TRUST_ENABLED = False
+MFA_WEBAUTHN_ALLOW_INSECURE_ORIGIN = False
+MFA_ALLOW_UNVERIFIED_EMAIL = True
+MFA_FORMS = {
+    "add_webauthn": "security.forms.AddSecurityKeyForm",
+    "authenticate_webauthn": "security.forms.AuthenticateSecurityKeyForm",
+    "reauthenticate_webauthn": "security.forms.ReauthenticateSecurityKeyForm",
+}
+SECURITY_KEY_ORIGIN = os.getenv("SITE_URL", "http://localhost:8000").rstrip("/")
+SESSION_COOKIE_AGE = 3600
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

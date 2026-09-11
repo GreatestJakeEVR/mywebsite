@@ -8,8 +8,16 @@ from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
 
 from pages.views import health, legacy_recipe, robots
+from security.views import AddSecurityKeyView, RemoveSecurityKeyView
 
 urlpatterns = [
+    path("accounts/2fa/webauthn/add/", AddSecurityKeyView.as_view(), name="security_key_add"),
+    path(
+        "accounts/2fa/webauthn/keys/<int:pk>/remove/",
+        RemoveSecurityKeyView.as_view(),
+        name="security_key_remove",
+    ),
+    path("accounts/", include("allauth.urls")),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("health/", health, name="health"),

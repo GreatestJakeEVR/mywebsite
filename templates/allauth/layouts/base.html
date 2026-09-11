@@ -1,0 +1,24 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{% block head_title %}Editor sign-in{% endblock %} · Jake Ardoin</title>
+  <link rel="icon" href="{% static 'images/JA_logo_favicon.ico' %}">
+  <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <main>
+    <a href="/"><img src="{% static 'images/JA_logo.png' %}" width="75" height="68" alt="Jake Ardoin home"></a>
+    <p>Website editor · Password + physical security key</p>
+    {% for message in messages %}<p role="status">{{ message }}</p>{% endfor %}
+    {% block content %}{% endblock %}
+    <p>Choose <strong>Security key</strong> or <strong>Use another device → Security key</strong> in your browser. Insert your YubiKey and touch it when prompted.</p>
+    <nav><a href="/admin/">Return to editor</a> · <a href="{% url 'account_logout' %}">Sign out</a></nav>
+  </main>
+  {% block extra_body %}{% endblock %}
+</body>
+</html>

@@ -5,3 +5,4 @@ django-storages[s3]==1.14.6
 dj-database-url==3.1.2
 psycopg[binary]==3.3.5
 gunicorn==23.0.0
+django-allauth[mfa]==65.19.2

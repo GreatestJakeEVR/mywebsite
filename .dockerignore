@@ -10,3 +10,5 @@ staticfiles
 backups
 tests
 docs
+.release-tag*
+.deploy.lock

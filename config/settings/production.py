@@ -31,6 +31,16 @@ SILENCED_SYSTEM_CHECKS = ["security.W005", "security.W021"]
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = "DENY"
 WAGTAILADMIN_BASE_URL = os.getenv("SITE_URL", "https://www.jakeardoin.com")
+SECURITY_KEY_ORIGIN = WAGTAILADMIN_BASE_URL.rstrip("/")
+if not SECURITY_KEY_ORIGIN.startswith("https://"):
+    raise ImproperlyConfigured("Security keys require an HTTPS SITE_URL in production.")
+# Share login rate limits between Gunicorn workers; create this table at release.
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+        "LOCATION": "website_cache",
+    }
+}
 STORAGES["default"] = {  # noqa: F405
     "BACKEND": "storages.backends.s3.S3Storage",
     "OPTIONS": {

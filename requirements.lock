@@ -4,10 +4,14 @@ beautifulsoup4==4.15.0
 boto3==1.43.89
 botocore==1.43.89
 certifi==2026.7.22
+cffi==2.1.1
 charset-normalizer==3.5.1
+colorama==0.4.6
+cryptography==50.0.1
 defusedxml==0.7.1
 dj-database-url==3.1.2
 Django==5.2.17
+django-allauth==65.19.2
 django-filter==26.1
 django-modelcluster==6.5
 django-permissionedforms==0.1
@@ -19,6 +23,7 @@ django-treebeard==5.3.1
 djangorestframework==3.18.1
 draftjs_exporter==5.2.0
 et_xmlfile==2.0.0
+fido2==2.2.1
 filetype==1.2.0
 gunicorn==23.0.0
 idna==3.19
@@ -31,7 +36,9 @@ pillow==12.3.0
 pillow_heif==1.7.0
 psycopg==3.3.5
 psycopg-binary==3.3.5
+pycparser==3.0
 python-dateutil==2.9.0.post0
+qrcode==8.2
 requests==2.34.2
 s3transfer==0.19.2
 six==1.17.0

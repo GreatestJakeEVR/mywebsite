@@ -1,0 +1,9 @@
+[Unit]
+Description=Back up website database to private S3
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/mywebsite
+ExecStart=/bin/bash /opt/mywebsite/deploy/backup.sh
