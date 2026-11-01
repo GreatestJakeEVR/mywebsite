@@ -1,0 +1,11 @@
+{
+  "name": "jake-devworks-design-preview",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A dependency-free design preview for the Jake DevWorks website rebuild.",
+  "scripts": {
+    "dev": "node server.mjs",
+    "check": "node --check app.js && node verify.mjs"
+  }
+}

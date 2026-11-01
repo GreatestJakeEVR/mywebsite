@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1322" height="1190" viewBox="0 0 1322 1190" role="img" aria-labelledby="title">
+  <title id="title">Gold JA monogram</title>
+  <defs><linearGradient id="bar-gold" gradientUnits="userSpaceOnUse" x1="0" y1="193" x2="0" y2="303"><stop stop-color="#ecc66d"/><stop offset="1" stop-color="#ecc66d"/></linearGradient><linearGradient id="body-gold" gradientUnits="userSpaceOnUse" x1="0" y1="352" x2="0" y2="1028"><stop stop-color="#ecc66c"/><stop offset="1" stop-color="#ebc66c"/></linearGradient><linearGradient id="cross-gold" gradientUnits="userSpaceOnUse" x1="0" y1="684" x2="0" y2="795"><stop stop-color="#ecc66c"/><stop offset="1" stop-color="#ebc66d"/></linearGradient></defs>
+  <path id="top-bar" fill="url(#bar-gold)" d="M 364 187 H 958 V 309 H 364 Z"/>
+  <path id="monogram" fill="url(#body-gold)" d="M 535 346 L 790 346 C 878.48 694.03 998.42 845.68 1151 928 L 1058 1035 C 747.71 864.21 700.14 421.87 683 450 L 639 450 C 535.14 730.01 467.38 1034.99 89 1035 L 89 906 C 106.01 889.53 357.11 999.74 535 346 Z"/>
+  <path id="crossbar" fill="url(#cross-gold)" d="M 597 678 H 726 L 774 801 H 547 Z"/>
+</svg>
