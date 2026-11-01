@@ -75,3 +75,9 @@ docker-compose-prod.yml
 
 #backup folder - for reference to old files while I do the redesign
 /backup/
+
+# Astro output and local configuration
+portfolio/.astro/
+portfolio/dist/
+portfolio/.env.*
+!portfolio/.env.example

@@ -2,6 +2,8 @@
 
 This is a reviewable visual prototype for rebuilding `www.jakeardoin.com` in the existing `GreatestJakeEVR/mywebsite` repository. The existing Django application is preserved. This folder does not change its routes or hosting.
 
+An Astro + TypeScript implementation now lives in [`../portfolio/`](../portfolio/README.md). Keep this folder as the original visual/content reference. Its introductory wording in `index.html` remains unchanged; the only visual fix here contains the decorative hero orbits to prevent mobile horizontal overflow. See the [implementation review](../portfolio/REVIEW.md) for checks and remaining production work.
+
 ## Run
 
 Use Node.js, with no package install required:

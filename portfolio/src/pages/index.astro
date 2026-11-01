@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import ProjectDialog from '../components/ProjectDialog.astro';
+import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import Work from '../components/Work.astro';
+import About from '../components/About.astro';
+import Process from '../components/Process.astro';
+import Journal from '../components/Journal.astro';
+import Contact from '../components/Contact.astro';
+---
+<BaseLayout title="Jake Ardoin · Jake DevWorks — Software, Websites & 3D Printing" description="Jake Ardoin of Jake DevWorks: custom software, business websites and online presence, and 3D design and printing in Baton Rouge, Louisiana.">
+  <SiteHeader/>
+  <main id="main">
+    <Hero/>
+    <Services/>
+    <Work/>
+    <About/>
+    <Process/>
+    <Journal/>
+    <Contact/>
+  </main>
+  <SiteFooter/>
+  <ProjectDialog/>
+</BaseLayout>
+<script>
+  import '../scripts/portfolio';
+</script>

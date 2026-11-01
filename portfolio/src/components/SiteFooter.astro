@@ -1,0 +1,6 @@
+---
+interface Props { article?: boolean }
+const { article = false } = Astro.props;
+const home = article ? '/' : '#home';
+---
+<footer class="wrap site-footer"><a class="brand" href={home}><img src="/assets/JA_logo.svg" width="40" height="36" alt=""/><span>JAKE<span class="brand-light">DEVWORKS</span><small>BY JAKE ARDOIN</small></span></a><p>Software, websites & things worth making.</p><span>© 2026 Jake DevWorks</span>{article ? <a href="/">Back to home ↗</a> : <a href="#home" aria-label="Back to top">Back to top ↑</a>}</footer>
