@@ -23,6 +23,7 @@ Open `http://127.0.0.1:4173`. Verify with `node --check app.js` and `node verify
 - Existing JA monogram and portrait; abstract project artwork represents the subject rather than screenshots of finished client websites.
 - About section with accurately described NASA internship, LSU instruction, and education.
 - A newly drafted introductory blog article for owner review.
+- A blog welcome page at `blog/` linking to the introductory article, and a separate `creations/` page for 3D printing work and future HeyGears creations. The collection is intentionally awaiting owner-provided photos and project descriptions.
 - Contact brief that opens a properly encoded email draft, with a manual copy fallback. It does not submit or send email automatically.
 
 ## Before production

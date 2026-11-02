@@ -5,7 +5,7 @@ import {fileURLToPath} from 'node:url';
 
 const root = fileURLToPath(new URL('.', import.meta.url));
 const approvedIntro = 'I help businesses and individuals bring their ideas to life—whether that means simplifying a business process, creating a website and building an online presence, or designing something you can hold. From the first conversation to the finished project, you’ll work directly with me.';
-const pages = ['index.html','blog/welcome/index.html'];
+const pages = ['index.html','blog/index.html','blog/welcome/index.html','creations/index.html'];
 let checked = 0;
 for (const page of pages) {
   const fullPath = path.join(root,page);
@@ -14,7 +14,7 @@ for (const page of pages) {
   for (const [, recipient] of html.matchAll(/href="mailto:([^"?]+)[^"]*"/g)) {
     assert.equal(recipient, 'jakedevworks@gmail.com', `${page}: business contact recipient`);
   }
-  assert.ok(html.includes(approvedIntro), `${page}: approved introduction must be preserved exactly`);
+  if (page === 'index.html' || page === 'blog/welcome/index.html') assert.ok(html.includes(approvedIntro), `${page}: approved introduction must be preserved exactly`);
   assert.ok(html.includes('noindex,nofollow'), `${page}: design preview must remain excluded from indexing`);
   assert.equal((html.match(/<h1[ >]/g) || []).length,1,`${page}: exactly one primary heading`);
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);

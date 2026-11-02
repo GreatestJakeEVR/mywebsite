@@ -7,25 +7,6 @@ function required<T extends Element>(selector: string): T {
   return element;
 }
 
-const menuButton = required<HTMLButtonElement>('.menu-toggle');
-const navigation = required<HTMLElement>('#main-nav');
-function setMenu(open: boolean) {
-  menuButton.setAttribute('aria-expanded', String(open));
-  navigation.classList.toggle('is-open', open);
-}
-menuButton.addEventListener('click', () => {
-  setMenu(menuButton.getAttribute('aria-expanded') !== 'true');
-});
-navigation.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => setMenu(false));
-});
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
-    setMenu(false);
-    menuButton.focus();
-  }
-});
-
 const dialog = required<HTMLDialogElement>('#project-dialog');
 const dialogTitle = required<HTMLElement>('#dialog-title');
 const dialogCategory = required<HTMLElement>('#dialog-category');

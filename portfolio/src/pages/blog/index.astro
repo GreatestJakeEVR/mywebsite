@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import BlogWelcome from '../../components/BlogWelcome.astro';
+import WelcomePost from '../../components/WelcomePost.astro';
+---
+<BaseLayout title="The blog · Jake DevWorks" description="Welcome to the Jake DevWorks blog: notes on software, websites, design, 3D printing, and the process behind the work.">
+  <SiteHeader article/>
+  <main id="main">
+    <BlogWelcome/>
+    <section class="section wrap blog-posts" aria-labelledby="start-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">A NOTE TO GET THINGS STARTED</p><h2 id="start-title">Start <em>here.</em></h2></div>
+        <p>A little about me, what I make,<br>and what you’ll find on this blog.</p>
+      </div>
+      <WelcomePost/>
+    </section>
+  </main>
+  <SiteFooter article/>
+</BaseLayout>
