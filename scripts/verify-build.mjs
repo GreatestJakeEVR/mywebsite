@@ -22,8 +22,15 @@ for (const page of pages) {
   const fullPath = path.join(root, page);
   const html = await readFile(fullPath, 'utf8');
   if (page === 'index.html') {
+    assert.doesNotMatch(html, /id="journal"|NOTES FROM THE WORKBENCH/, 'Homepage: workbench notes section removed');
+    assert.doesNotMatch(html, /class="eyebrow">\d+\s*\//, 'Homepage: section titles have no numeric prefix');
     assert.doesNotMatch(html, /data-project=|id="project-dialog"|id="work"/, 'Homepage: project gallery and dialog moved to Work');
     assert.match(html, /href="\/work\/"/, 'Homepage: link to the separate Work page');
+  }
+  if (page !== 'admin/index.html') {
+    const navigation = html.match(/<nav\b[^>]*id="main-nav"[^>]*>([\s\S]*?)<\/nav>/)?.[1] ?? '';
+    assert.ok(navigation, `${page}: main navigation exists`);
+    assert.doesNotMatch(navigation, />Services<|href="[^"]*#services"/, `${page}: Services link removed from navbar`);
   }
   if (page === 'work/index.html') {
     const count = (html.match(/data-project="/g) ?? []).length;

@@ -10,6 +10,13 @@ let checked = 0;
 for (const page of pages) {
   const fullPath = path.join(root,page);
   const html = await readFile(fullPath,'utf8');
+  const navigation = html.match(/<nav\b[^>]*id="main-nav"[^>]*>([\s\S]*?)<\/nav>/)?.[1] ?? '';
+  assert.ok(navigation, `${page}: main navigation exists`);
+  assert.doesNotMatch(navigation, />Services<|href="[^"]*#services"/, `${page}: Services link removed from navbar`);
+  if (page === 'index.html') {
+    assert.doesNotMatch(html, /id="journal"|NOTES FROM THE WORKBENCH/, 'Homepage: workbench notes section removed');
+    assert.doesNotMatch(html, /class="eyebrow">\d+\s*\//, 'Homepage: section titles have no numeric prefix');
+  }
   const visibleText = html.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/g, '').replace(/<[^>]*>/g, '');
   assert.doesNotMatch(visibleText, /[\w.+-]+@gmail\.com/i, `${page}: no owner email address displayed`);
   for (const [, recipient] of html.matchAll(/href="mailto:([^"?]+)[^"]*"/g)) {

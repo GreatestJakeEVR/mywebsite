@@ -3,7 +3,7 @@ import { getContent } from "../lib/content";
 const { services } = await getContent();
 ---
 <section class="section wrap" id="services" aria-labelledby="services-title">
-      <div class="section-heading"><div><p class="eyebrow">01 / WHAT I CAN HELP WITH</p><h2 id="services-title">Let’s make it <em>happen.</em></h2></div><p>Tools for your business.<br>A presence online. Something you can hold.</p></div>
+      <div class="section-heading"><div><p class="eyebrow">WHAT I CAN HELP WITH</p><h2 id="services-title">Let’s make it <em>happen.</em></h2></div><p>Tools for your business.<br>A presence online. Something you can hold.</p></div>
       <div class="services-grid">{services.map((service, index) => (
         <article class:list={['service', {'service-print': service.key === 'printing'}]}><div class="service-top"><span class="service-icon" aria-hidden="true">{service.icon}</span><span class="service-number">{String(index + 1).padStart(2, '0')}</span></div><h3 class="preserve-lines">{service.title}</h3><p>{service.description}</p><ul>{service.features.map(feature => <li>{feature}</li>)}</ul><a class="service-link" href="#contact" data-service={service.selection}>{service.cta} <span aria-hidden="true">↗</span></a></article>
       ))}</div>

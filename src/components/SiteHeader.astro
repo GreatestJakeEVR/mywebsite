@@ -7,7 +7,6 @@ const home = article ? '/' : '';
   <a class="brand" href={article ? '/' : '#home'} aria-label="Jake DevWorks home"><img src="/assets/JA_logo.svg" width="46" height="42" alt=""/><span>JAKE<span class="brand-light">DEVWORKS</span><small>BY JAKE ARDOIN</small></span></a>
   <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">Menu <span aria-hidden="true">☰</span></button>
   <nav id="main-nav" aria-label="Main navigation">
-    <a href={`${home}#services`}>Services</a>
     <a href="/work/" aria-current={Astro.url.pathname === '/work/' ? 'page' : undefined}>Work</a>
     <a href="/creations/" aria-current={Astro.url.pathname === '/creations/' ? 'page' : undefined}>Creations</a>
     <a href={`${home}#about`}>About</a>
