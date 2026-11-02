@@ -6,12 +6,22 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../dist/', import.meta.url));
 const prototype = fileURLToPath(new URL('../../design-preview/', import.meta.url));
 const approvedIntro = 'I help businesses and individuals bring their ideas to life—whether that means simplifying a business process, creating a website and building an online presence, or designing something you can hold. From the first conversation to the finished project, you’ll work directly with me.';
-const pages = ['index.html', 'blog/index.html', 'blog/welcome/index.html', 'creations/index.html'];
+const pages = ['index.html', 'work/index.html', 'blog/index.html', 'blog/welcome/index.html', 'creations/index.html'];
 let checked = 0;
 
 for (const page of pages) {
   const fullPath = path.join(root, page);
   const html = await readFile(fullPath, 'utf8');
+  if (page === 'index.html') {
+    assert.doesNotMatch(html, /data-project=|id="project-dialog"|id="work"/, 'Homepage: project gallery and dialog moved to Work');
+    assert.match(html, /href="\/work\/"/, 'Homepage: link to the separate Work page');
+  }
+  if (page === 'work/index.html') {
+    assert.equal((html.match(/data-project="/g) ?? []).length, 5, 'Work: all five projects preserved');
+    assert.match(html, /id="project-dialog"/, 'Work: accessible project dialog');
+    assert.match(html, /href="\/#contact" id="dialog-contact"/, 'Work: inquiry returns to homepage contact');
+    assert.match(html, /href="\/work\/" aria-current="page"/, 'Work: current navigation item');
+  }
   if (page === 'creations/index.html') {
     for (const id of ['trash-bag-dispenser', 'printed-business-card', 'mario-block-lights', 'geometric-tiger', 'heygears', 'custom-shirts']) {
       assert.ok(html.includes(`id="${id}"`), `Creations: ${id} section exists`);
@@ -22,7 +32,8 @@ for (const page of pages) {
     assert.match(html, /full-color 3D/);
     assert.match(html, /plan to make for myself/);
   }
-  assert.doesNotMatch(html.replace(/<[^>]*>/g, ''), /[\w.+-]+@gmail\.com/i, `${page}: no owner email address displayed`);
+  const visibleText = html.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/g, '').replace(/<[^>]*>/g, '');
+  assert.doesNotMatch(visibleText, /[\w.+-]+@gmail\.com/i, `${page}: no owner email address displayed`);
   for (const [, recipient] of html.matchAll(/href="mailto:([^"?]+)[^"]*"/g)) {
     assert.equal(recipient, 'jakedevworks@gmail.com', `${page}: business contact recipient`);
   }

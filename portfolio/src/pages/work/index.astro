@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import Work from '../../components/Work.astro';
+import ProjectDialog from '../../components/ProjectDialog.astro';
+---
+<BaseLayout title="Work · Jake DevWorks" description="Selected websites, software projects, and technical experience from Jake Ardoin of Jake DevWorks.">
+  <SiteHeader article/>
+  <main id="main">
+    <Work/>
+  </main>
+  <SiteFooter article/>
+  <ProjectDialog/>
+</BaseLayout>
+<script>
+  import '../../scripts/work';
+</script>

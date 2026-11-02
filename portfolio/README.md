@@ -1,6 +1,6 @@
 # Jake DevWorks portfolio
 
-An Astro + TypeScript port of the original design preview, kept alongside the existing Django application. The homepage, blog landing page, introductory article, and Creations page build to static HTML. Shared navigation runs on every page; project and contact interactions run only on the homepage. No React runtime or server adapter is required for this static output.
+An Astro + TypeScript port of the original design preview, kept alongside the existing Django application. The homepage, Work page, blog landing page, introductory article, and Creations page build to static HTML. Shared navigation runs on every page; project interactions run on Work, and contact interactions run on the homepage. No React runtime or server adapter is required for this static output.
 
 ## Run and check
 
@@ -22,7 +22,7 @@ pnpm verify
 pnpm preview
 ```
 
-`check` checks Astro and TypeScript; `test` checks contact email encoding and blank input; `verify` checks the four built pages, their local links and anchors, the exact approved introduction, original asset bytes, and preview indexing protections. Run `build` before `verify`.
+`check` checks Astro and TypeScript; `test` checks contact email encoding and blank input; `verify` checks the five built pages, their local links and anchors, the exact approved introduction, original asset bytes, and preview indexing protections. Run `build` before `verify`.
 
 On this Windows machine, the bundled pnpm CLI is available through Node if `pnpm` is not on PATH:
 
@@ -42,10 +42,10 @@ The system CA option resolved the local registry certificate-chain error without
 
 ## Editing and architecture
 
-- `src/pages/` defines `/`, `/blog/`, `/blog/welcome/`, and `/creations/`.
+- `src/pages/` defines `/`, `/work/`, `/blog/`, `/blog/welcome/`, and `/creations/`.
 - `src/layouts/BaseLayout.astro` shares document metadata, fonts/styles, and the skip link. `src/components/` contains the homepage sections, header, footer, and project dialog.
 - `src/data/projects.ts` contains typed project-detail copy, reused from the prototype. Services and article copy are still local Astro content.
-- `src/scripts/navigation.ts` handles the shared menu. `src/scripts/portfolio.ts` handles accessible project dialogs and filters, service selection, and the email-draft fallback. `src/lib/project-email.ts` creates the encoded draft without sending anything.
+- `src/scripts/navigation.ts` handles the shared menu. `src/scripts/work.ts` handles accessible project dialogs and filters on `/work/`. `src/scripts/portfolio.ts` handles homepage service selection and the email-draft fallback. `src/lib/project-email.ts` creates the encoded draft without sending anything.
 - `public/assets/` preserves the original logo and portrait; `src/styles/global.css` reuses the prototype styling, including the mobile orbit-overflow fix.
 - The source of approval remains `../design-preview/index.html`. Its introductory wording must match the built pages exactly. Do not rewrite it during CMS migration.
 

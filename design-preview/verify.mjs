@@ -5,12 +5,13 @@ import {fileURLToPath} from 'node:url';
 
 const root = fileURLToPath(new URL('.', import.meta.url));
 const approvedIntro = 'I help businesses and individuals bring their ideas to life—whether that means simplifying a business process, creating a website and building an online presence, or designing something you can hold. From the first conversation to the finished project, you’ll work directly with me.';
-const pages = ['index.html','blog/index.html','blog/welcome/index.html','creations/index.html'];
+const pages = ['index.html','work/index.html','blog/index.html','blog/welcome/index.html','creations/index.html'];
 let checked = 0;
 for (const page of pages) {
   const fullPath = path.join(root,page);
   const html = await readFile(fullPath,'utf8');
-  assert.doesNotMatch(html.replace(/<[^>]*>/g, ''), /[\w.+-]+@gmail\.com/i, `${page}: no owner email address displayed`);
+  const visibleText = html.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/g, '').replace(/<[^>]*>/g, '');
+  assert.doesNotMatch(visibleText, /[\w.+-]+@gmail\.com/i, `${page}: no owner email address displayed`);
   for (const [, recipient] of html.matchAll(/href="mailto:([^"?]+)[^"]*"/g)) {
     assert.equal(recipient, 'jakedevworks@gmail.com', `${page}: business contact recipient`);
   }

@@ -2,7 +2,7 @@
 
 This is a reviewable visual prototype for rebuilding `www.jakeardoin.com` in the existing `GreatestJakeEVR/mywebsite` repository. The existing Django application is preserved. This folder does not change its routes or hosting.
 
-An Astro + TypeScript implementation now lives in [`../portfolio/`](../portfolio/README.md). Keep this folder as the original visual/content reference. Its introductory wording in `index.html` remains unchanged; the only visual fix here contains the decorative hero orbits to prevent mobile horizontal overflow. See the [implementation review](../portfolio/REVIEW.md) for checks and remaining production work.
+An Astro + TypeScript implementation now lives in [`../portfolio/`](../portfolio/README.md). Keep this folder as the original visual/content reference. Its introductory wording in `index.html` remains unchanged. The prototype mirrors the reviewed pages and navigation, including the decorative hero-orbit overflow fix. See the [implementation review](../portfolio/REVIEW.md) for checks and remaining production work.
 
 ## Run
 
@@ -19,7 +19,7 @@ Open `http://127.0.0.1:4173`. Verify with `node --check app.js` and `node verify
 - Charcoal, purple, gold, and white design; responsive navigation and reduced-motion support.
 - User-approved introduction, unchanged.
 - Services for software/apps, business websites/online presence, and 3D design/printing.
-- Five project summaries drawn from the uploaded résumé, existing repository, and owner's account of the Relief Telemed work, with filter controls and accessible project dialogs.
+- A separate `work/` page with five project summaries drawn from the uploaded résumé, existing repository, and owner's account of the Relief Telemed work, with filter controls and accessible project dialogs.
 - Existing JA monogram and portrait; abstract project artwork represents the subject rather than screenshots of finished client websites.
 - About section with accurately described NASA internship, LSU instruction, and education.
 - A newly drafted introductory blog article for owner review.
