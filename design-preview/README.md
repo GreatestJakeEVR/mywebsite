@@ -1,8 +1,8 @@
 # Jake DevWorks — first design preview
 
-This is a reviewable visual prototype for rebuilding `www.jakeardoin.com` in the existing `GreatestJakeEVR/mywebsite` repository. The existing Django application is preserved. This folder does not change its routes or hosting.
+This is the original visual prototype for `www.jakeardoin.com` in the `GreatestJakeEVR/mywebsite` repository. The Astro application now occupies the repository root. The former Django application is preserved in Git history.
 
-An Astro + TypeScript implementation now lives in [`../portfolio/`](../portfolio/README.md). Keep this folder as the original visual/content reference. Its introductory wording in `index.html` remains unchanged. The prototype mirrors the reviewed pages and navigation, including the decorative hero-orbit overflow fix. See the [implementation review](../portfolio/REVIEW.md) for checks and remaining production work.
+The Astro + TypeScript implementation is documented in [`../README.md`](../README.md). Keep this folder as the original visual/content reference. Its introductory wording in `index.html` remains unchanged. The prototype mirrors the reviewed pages and navigation, including the decorative hero-orbit overflow fix. See the [implementation review](../REVIEW.md) for checks and remaining production work.
 
 ## Run
 
@@ -30,7 +30,7 @@ Open `http://127.0.0.1:4173`. Verify with `node --check app.js` and `node verify
 
 The agreed production direction is Astro + TypeScript on Cloudflare, with Sanity Studio for browser editing. This prototype is plain HTML/CSS/JavaScript because framework package downloads were unavailable during this pass. It is not the completed CMS application.
 
-1. Port the reviewed design into Astro components and TypeScript. Keep the existing application and cookbook available until their migration is decided.
+1. The reviewed design has been ported to Astro components and TypeScript at the repository root. Legacy application and cookbook source remain available in Git history.
 2. Connect an owner-controlled Sanity project. Define posts, projects, and services; support drafts and previews. Keep write tokens server-side. Configure publish-triggered builds and backup/export instructions.
 3. Replace the email-draft flow with a server-side contact endpoint if desired, using validated input, spam controls, and a transactional email provider. Confirm the receiving address before launch.
 4. Review the drafted introductory article, résumé-derived copy, and use of client/project names. Add actual project imagery and 3D printing photographs when available. The planned HeyGears figurine service is described as a future goal; a full-color workflow and ordering are not yet available.

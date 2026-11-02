@@ -57,10 +57,10 @@ const projects = {
     title: 'Recipes, preserved digitally', category: 'PERSONAL PROJECT / RECIPE EXTRACTION',
     paragraphs: [
       'One of my personal projects explores extracting recipes from vintage cookbooks and organizing them digitally.',
-      'The existing website repository includes a Django cookbook application, recipe data, and templates for browsing recipes and authors. It’s a project that brings my interest in software together with my interest in cooking.'
+      'An earlier version of this repository includes a Django cookbook application, recipe data, and templates for browsing recipes and authors. It’s a project that brings my interest in software together with my interest in cooking.'
     ],
     skills: ['Python & Django', 'Data extraction', 'Structured recipe data'],
-    url: 'https://github.com/GreatestJakeEVR/mywebsite/tree/master/cookbook'
+    url: 'https://github.com/GreatestJakeEVR/mywebsite/tree/f4181f95873a0c83b4f849b788b89d33d3595064/cookbook'
   }
 };
 
