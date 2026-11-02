@@ -1,1 +1,6 @@
-<a class="journal-feature" aria-labelledby="welcome-post-title" href="/blog/welcome/"><div class="journal-art" aria-hidden="true"><span>&lt;/&gt;</span><span>+</span><span>◇</span><div class="journal-art-line"></div><small>CODE / CREATE / REPEAT</small></div><div class="journal-copy"><div class="project-meta"><span>STUDIO NOTES</span><time datetime="2026-11-01">NOV 01, 2026</time></div><h3 id="welcome-post-title">A home for software<br>and things worth making.</h3><p>An introduction to Jake DevWorks, the work I do, and what you’ll find here.</p><span class="text-link">Read the introduction <span aria-hidden="true">↗</span></span></div></a>
+---
+import { getContent } from '../lib/content';
+import PostCard from './PostCard.astro';
+const { posts } = await getContent();
+---
+{posts[0] && <PostCard post={posts[0]}/>}

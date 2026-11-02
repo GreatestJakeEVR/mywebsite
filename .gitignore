@@ -81,3 +81,6 @@ portfolio/.astro/
 portfolio/dist/
 portfolio/.env.*
 !portfolio/.env.example
+portfolio/studio-dist/
+portfolio/.sanity/
+portfolio/.wrangler/

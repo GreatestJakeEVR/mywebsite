@@ -1,9 +1,11 @@
+---
+import { getContent } from "../lib/content";
+const { services } = await getContent();
+---
 <section class="section wrap" id="services" aria-labelledby="services-title">
       <div class="section-heading"><div><p class="eyebrow">01 / WHAT I CAN HELP WITH</p><h2 id="services-title">Let’s make it <em>happen.</em></h2></div><p>Tools for your business.<br>A presence online. Something you can hold.</p></div>
-      <div class="services-grid">
-        <article class="service"><div class="service-top"><span class="service-icon" aria-hidden="true">&lt;/&gt;</span><span class="service-number">01</span></div><h3>Software &<br>app development</h3><p>Software built around how you work. Custom applications, useful automations, and connected systems that help you get things done.</p><ul><li>Custom applications & business tools</li><li>APIs & system integrations</li><li>Workflow automation & AI tools</li></ul><a class="service-link" href="#contact" data-service="Software & apps">Discuss a software project <span aria-hidden="true">↗</span></a></article>
-        <article class="service"><div class="service-top"><span class="service-icon" aria-hidden="true">↗</span><span class="service-number">02</span></div><h3>Websites &<br>online presence</h3><p>A professional home for your business online, with clear information and straightforward ways for customers to find and contact you.</p><ul><li>Custom business websites</li><li>Google Business Profile & listings</li><li>SEO & search visibility</li></ul><a class="service-link" href="#contact" data-service="Websites & online presence">Build your online presence <span aria-hidden="true">↗</span></a></article>
-        <article class="service service-print"><div class="service-top"><span class="service-icon" aria-hidden="true">◇</span><span class="service-number">03</span></div><h3>3D design &<br>printing</h3><p>From a sketch or an existing model to a finished piece. Custom design and printing for businesses, hobby projects, and decoration.</p><ul><li>Custom models & prototypes</li><li>Practical parts & hobby accessories</li><li>Décor, displays & personalized pieces</li></ul><a class="service-link" href="#contact" data-service="3D design & printing">Make something physical <span aria-hidden="true">↗</span></a></article>
-      </div>
+      <div class="services-grid">{services.map((service, index) => (
+        <article class:list={['service', {'service-print': service.key === 'printing'}]}><div class="service-top"><span class="service-icon" aria-hidden="true">{service.icon}</span><span class="service-number">{String(index + 1).padStart(2, '0')}</span></div><h3 class="preserve-lines">{service.title}</h3><p>{service.description}</p><ul>{service.features.map(feature => <li>{feature}</li>)}</ul><a class="service-link" href="#contact" data-service={service.selection}>{service.cta} <span aria-hidden="true">↗</span></a></article>
+      ))}</div>
       <div class="service-footnote"><span class="plus" aria-hidden="true">+</span><p>Have a project that crosses categories? That’s a good place to start a conversation.</p><a href="#contact">Let’s figure it out <span aria-hidden="true">↗</span></a></div>
     </section>

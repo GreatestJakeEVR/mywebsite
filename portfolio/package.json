@@ -4,20 +4,35 @@
   "private": true,
   "type": "module",
   "packageManager": "pnpm@11.25.0",
-  "engines": { "node": ">=22.23.4" },
+  "engines": {
+    "node": ">=22.23.4"
+  },
   "scripts": {
     "dev": "astro dev --host 127.0.0.1",
     "check": "astro check",
     "build": "astro build",
     "preview": "astro preview --host 127.0.0.1",
     "test": "node --test tests/*.test.mjs",
-    "verify": "node scripts/verify-build.mjs"
+    "verify": "node scripts/verify-build.mjs",
+    "studio:dev": "sanity dev --host 127.0.0.1 --port 3333",
+    "studio:build": "sanity build studio-dist",
+    "studio:deploy": "sanity deploy",
+    "cms:seed": "sanity exec scripts/seed-sanity.ts --with-user-token",
+    "build:production": "node scripts/build-production.mjs"
   },
   "dependencies": {
+    "@portabletext/to-html": "6.0.0",
+    "@sanity/client": "8.14.1",
     "astro": "7.4.4"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
-    "typescript": "5.9.3"
+    "@types/node": "^24.19.2",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "sanity": "6.21.0",
+    "styled-components": "6.6.0",
+    "typescript": "6.0.3",
+    "wrangler": "4.155.0"
   }
 }

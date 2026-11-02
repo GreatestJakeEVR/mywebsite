@@ -3,7 +3,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
 import BlogWelcome from '../../components/BlogWelcome.astro';
-import WelcomePost from '../../components/WelcomePost.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getContent } from '../../lib/content';
+const { posts } = await getContent();
 ---
 <BaseLayout title="The blog · Jake DevWorks" description="Welcome to the Jake DevWorks blog: notes on software, websites, design, 3D printing, and the process behind the work.">
   <SiteHeader article/>
@@ -11,10 +13,11 @@ import WelcomePost from '../../components/WelcomePost.astro';
     <BlogWelcome/>
     <section class="section wrap blog-posts" aria-labelledby="start-title">
       <div class="section-heading">
-        <div><p class="eyebrow">A NOTE TO GET THINGS STARTED</p><h2 id="start-title">Start <em>here.</em></h2></div>
-        <p>A little about me, what I make,<br>and what you’ll find on this blog.</p>
+        <div><p class="eyebrow">NOTES FROM THE WORKBENCH</p><h2 id="start-title">The latest <em>posts.</em></h2></div>
+        <p>Ideas, experiments,<br>and the process behind the work.</p>
       </div>
-      <WelcomePost/>
+      <div class="blog-post-list">{posts.map(post => <PostCard post={post}/>)}</div>
+      {!posts.length && <p>New notes are on the way. Check back soon.</p>}
     </section>
   </main>
   <SiteFooter article/>

@@ -1,10 +1,12 @@
-import { projects } from '../data/projects';
+import type { ProjectDetail } from '../data/projects';
 
 function required<T extends Element>(selector: string): T {
   const element = document.querySelector<T>(selector);
   if (!element) throw new Error(`Missing portfolio element: ${selector}`);
   return element;
 }
+
+const projects = JSON.parse(required<HTMLScriptElement>('#project-data').textContent || '{}') as Record<string, ProjectDetail>;
 
 const dialog = required<HTMLDialogElement>('#project-dialog');
 const dialogTitle = required<HTMLElement>('#dialog-title');

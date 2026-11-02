@@ -1,0 +1,10 @@
+---
+import type { Post } from '../lib/content-model';
+interface Props { post: Post; heading?: 'h2' | 'h3' }
+const { post, heading: Heading = 'h3' } = Astro.props;
+const date = new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric', timeZone: 'America/Chicago' });
+---
+<a class="journal-feature" href={`/blog/${post.slug}/`}>
+  <div class="journal-art" aria-hidden="true"><span>&lt;/&gt;</span><span>+</span><span>◇</span><div class="journal-art-line"></div><small>CODE / CREATE / REPEAT</small></div>
+  <div class="journal-copy"><div class="project-meta"><span>{post.category || 'FROM THE WORKBENCH'}</span><time datetime={post.publishedAt}>{date.toUpperCase()}</time></div><Heading>{post.title}</Heading><p>{post.excerpt}</p><span class="text-link">Read the post <span aria-hidden="true">↗</span></span></div>
+</a>

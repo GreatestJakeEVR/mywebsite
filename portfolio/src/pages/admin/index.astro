@@ -1,0 +1,7 @@
+---
+import { studioUrl } from '../../lib/site-config';
+import { safeUrl } from '../../lib/content-model';
+const editor = safeUrl(studioUrl);
+---
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="robots" content="noindex,nofollow"/><title>Edit content · Jake DevWorks</title>{editor && <meta http-equiv="refresh" content={`0;url=${editor}`}/>}</head><body><main><h1>Jake DevWorks content editor</h1>{editor ? <p><a href={editor}>Open Sanity Studio</a> and sign in to edit your posts, work projects, and services.</p> : <p>The editor is being connected. <a href="/">Return to the website</a>.</p>}</main></body></html>
