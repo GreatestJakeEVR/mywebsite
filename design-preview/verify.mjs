@@ -10,6 +10,10 @@ let checked = 0;
 for (const page of pages) {
   const fullPath = path.join(root,page);
   const html = await readFile(fullPath,'utf8');
+  assert.doesNotMatch(html.replace(/<[^>]*>/g, ''), /[\w.+-]+@gmail\.com/i, `${page}: no owner email address displayed`);
+  for (const [, recipient] of html.matchAll(/href="mailto:([^"?]+)[^"]*"/g)) {
+    assert.equal(recipient, 'jakedevworks@gmail.com', `${page}: business contact recipient`);
+  }
   assert.ok(html.includes(approvedIntro), `${page}: approved introduction must be preserved exactly`);
   assert.ok(html.includes('noindex,nofollow'), `${page}: design preview must remain excluded from indexing`);
   assert.equal((html.match(/<h1[ >]/g) || []).length,1,`${page}: exactly one primary heading`);

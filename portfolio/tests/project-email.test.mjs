@@ -13,13 +13,13 @@ test('keeps Unicode, punctuation, and line breaks in the email body without crea
   const result = prepareProjectEmail(inquiry);
   const url = new URL(result.href);
   assert.equal(url.protocol, 'mailto:');
-  assert.equal(url.pathname, 'jake.a.csc@gmail.com');
+  assert.equal(url.pathname, 'jakedevworks@gmail.com');
   assert.deepEqual([...url.searchParams.keys()], ['subject', 'body']);
   assert.equal(url.searchParams.get('subject'), 'Project inquiry: 3D design & printing');
   const body = url.searchParams.get('body');
   assert.ok(body.includes(inquiry.message.trim()));
   assert.ok(body.endsWith('Name: Example Client\nReply email: example@example.test'));
-  assert.equal(result.draft, `To: jake.a.csc@gmail.com\nSubject: ${url.searchParams.get('subject')}\n\n${body}`);
+  assert.equal(result.draft, `Subject: ${url.searchParams.get('subject')}\n\n${body}`);
 });
 
 test('rejects blank required fields before creating a mailto link', () => {

@@ -55,3 +55,9 @@ The following passed after the runtime changes:
 - Original prototype: `node --check app.js` and `node verify.mjs` passed.
 
 These checks do not establish production readiness. Sanity, Cloudflare deployment/headers, DNS, email delivery, other browser engines, physical devices, assistive technology, and real production data remain unverified. Reduced-motion support is preserved in CSS; a full accessibility audit and localized/RTL versions were not part of this pass. No CI workflow or deployment automation was added.
+
+## Contact update — November 2, 2026
+
+The owner requested that the website not print an email address and that contact drafts use `jakedevworks@gmail.com`. The Astro contact component and original prototype now use “Email Jake DevWorks” labels, including the fallback and noscript links. Both email builders use the business recipient and omit the `To:` line from the visible copy text. The approved introductory wording is unchanged.
+
+The updated unit and built-page assertions failed against the previous implementation, then passed after the change. Fresh checks returned 0 Astro/TypeScript diagnostics, 2 passing unit tests, a successful 2-page build, and 36 valid local links/assets in each verifier. Browser assertions confirmed no owner address in visible page text, the correct recipient in every mailto link, and no horizontal overflow at 1440, 390, and 320px. The external email-app handoff and actual delivery remain unverified; no email was sent.

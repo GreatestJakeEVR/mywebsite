@@ -73,7 +73,34 @@
 
     <section class="section wrap" id="journal" aria-labelledby="journal-title"><div class="section-heading"><div><p class="eyebrow">04 / NOTES FROM THE WORKBENCH</p><h2 id="journal-title">Behind <em>the build.</em></h2></div><p>Software, printing, and the<br>projects that connect them.</p></div><a class="journal-feature" href="blog/welcome/"><div class="journal-art" aria-hidden="true"><span>&lt;/&gt;</span><span>+</span><span>◇</span><div class="journal-art-line"></div><small>CODE / CREATE / REPEAT</small></div><div class="journal-copy"><div class="project-meta"><span>STUDIO NOTES</span><time datetime="2026-11-01">NOV 01, 2026</time></div><h3>A home for software<br>and things worth making.</h3><p>An introduction to Jake DevWorks, the work I do, and what you’ll find here.</p><span class="text-link">Read the introduction <span aria-hidden="true">↗</span></span></div></a></section>
 
-    <section class="contact-section section" id="contact" aria-labelledby="contact-title"><div class="wrap contact-grid"><div class="contact-copy"><p class="eyebrow">05 / LET’S TALK</p><h2 id="contact-title">What do you<br>want to <em>make?</em></h2><p>A clear brief, a rough sketch, or just an idea.<br>Tell me where you’re starting.</p><a class="email-link" href="mailto:jake.a.csc@gmail.com">jake.a.csc@gmail.com <span aria-hidden="true">↗</span></a><p class="contact-location">Baton Rouge, Louisiana</p></div><form id="contact-form"><div class="form-grid"><label>Your name <input name="name" autocomplete="name" required maxlength="100" placeholder="How should I address you?"></label><label>Email address <input name="email" type="email" autocomplete="email" required maxlength="200" placeholder="you@example.com"></label></div><label>What can I help with? <select name="service" id="service"><option>Software & apps</option><option>Websites & online presence</option><option>3D design & printing</option><option>A bit of everything / not sure yet</option></select></label><label>Tell me about your project <textarea name="message" rows="5" required maxlength="5000" placeholder="What would you like to build? Include any goals, dimensions, timing, or budget you have in mind."></textarea></label><button class="button button-gold" type="submit">Prepare project email <span aria-hidden="true">↗</span></button><p class="form-note">Opens a draft in your email app for you to review and send. You can also email me directly above.</p><div id="email-draft" class="email-draft" hidden><p role="status">Your email draft is ready. If your email app didn’t open, copy the details below and email them to <a href="mailto:jake.a.csc@gmail.com">jake.a.csc@gmail.com</a>.</p><label>Project details <textarea id="draft-text" rows="8" readonly></textarea></label><button type="button" class="copy-button" id="copy-draft">Copy project details</button><span id="copy-status" role="status"></span></div><noscript><p>Please email <a href="mailto:jake.a.csc@gmail.com">jake.a.csc@gmail.com</a> directly with your project details.</p></noscript></form></div></section>
+    <section class="contact-section section" id="contact" aria-labelledby="contact-title">
+  <div class="wrap contact-grid">
+    <div class="contact-copy">
+      <p class="eyebrow">05 / LET’S TALK</p>
+      <h2 id="contact-title">What do you<br>want to <em>make?</em></h2>
+      <p>A clear brief, a rough sketch, or just an idea.<br>Tell me where you’re starting.</p>
+      <a class="email-link" href="mailto:jakedevworks@gmail.com">Email Jake DevWorks <span aria-hidden="true">↗</span></a>
+      <p class="contact-location">Baton Rouge, Louisiana</p>
+    </div>
+    <form id="contact-form">
+      <div class="form-grid">
+        <label>Your name <input name="name" autocomplete="name" required maxlength="100" placeholder="How should I address you?"></label>
+        <label>Email address <input name="email" type="email" autocomplete="email" required maxlength="200" placeholder="you@example.com"></label>
+      </div>
+      <label>What can I help with? <select name="service" id="service"><option>Software & apps</option><option>Websites & online presence</option><option>3D design & printing</option><option>A bit of everything / not sure yet</option></select></label>
+      <label>Tell me about your project <textarea name="message" rows="5" required maxlength="5000" placeholder="What would you like to build? Include any goals, dimensions, timing, or budget you have in mind."></textarea></label>
+      <button class="button button-gold" type="submit">Prepare project email <span aria-hidden="true">↗</span></button>
+      <p class="form-note">Opens a draft in your email app for you to review and send. You can also use the email link.</p>
+      <div id="email-draft" class="email-draft" hidden>
+        <p role="status">Your email draft is ready. If your email app didn’t open, copy the details below and use <a href="mailto:jakedevworks@gmail.com">Email Jake DevWorks</a>.</p>
+        <label>Project details <textarea id="draft-text" rows="8" readonly></textarea></label>
+        <button type="button" class="copy-button" id="copy-draft">Copy project details</button>
+        <span id="copy-status" role="status"></span>
+      </div>
+      <noscript><p>Please <a href="mailto:jakedevworks@gmail.com">email Jake DevWorks</a> with your project details.</p></noscript>
+    </form>
+  </div>
+</section>
   </main>
   <footer class="wrap site-footer"><a class="brand" href="#home"><img src="assets/JA_logo.svg" width="40" height="36" alt=""><span>JAKE<span class="brand-light">DEVWORKS</span><small>BY JAKE ARDOIN</small></span></a><p>Software, websites & things worth making.</p><span>© 2026 Jake DevWorks</span><a href="#home" aria-label="Back to top">Back to top ↑</a></footer>
   <dialog id="project-dialog" aria-labelledby="dialog-title"><button class="dialog-close" type="button" aria-label="Close project details">×</button><p class="eyebrow" id="dialog-category"></p><h2 id="dialog-title"></h2><div id="dialog-body"></div><div class="dialog-actions"><a class="button button-gold" href="#contact" id="dialog-contact">Discuss a similar project ↗</a><a class="text-link" id="dialog-external" target="_blank" rel="noopener noreferrer" hidden>Visit project ↗</a></div></dialog>

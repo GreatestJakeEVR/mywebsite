@@ -132,9 +132,9 @@ document.querySelector('#contact-form')?.addEventListener('submit', event => {
   if (!name || !email || !message) return;
   const subject = `Project inquiry: ${service}`;
   const body = `Hello Jake,\n\n${message}\n\nService: ${service}\nName: ${name}\nReply email: ${email}`;
-  document.querySelector('#draft-text').value = `To: jake.a.csc@gmail.com\nSubject: ${subject}\n\n${body}`;
+  document.querySelector('#draft-text').value = `Subject: ${subject}\n\n${body}`;
   document.querySelector('#email-draft').hidden = false;
-  window.location.href = `mailto:jake.a.csc@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.location.href = `mailto:jakedevworks@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 });
 document.querySelector('#copy-draft')?.addEventListener('click', async () => {
   const text = document.querySelector('#draft-text');
