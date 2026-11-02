@@ -122,3 +122,10 @@ dialog{background:#201c27;color:var(--white);border:1px solid #b292e860;padding:
 
 /* CMS content uses the existing layout and remains readable with longer copy. */
 .preserve-lines{white-space:pre-line}.blog-post-list{display:grid;gap:55px}.article-body img{display:block;max-width:100%;height:auto}.article-body figure{margin:32px 0}.article-body figcaption{font-size:12px;line-height:1.7;margin-top:12px}.article-body blockquote{border-left:2px solid var(--purple);margin:28px 0;padding-left:24px}.article-header h1,.journal-copy h3,.project h2{overflow-wrap:anywhere}
+
+/* Direct contact-form delivery */
+.contact-honeypot{display:none}
+.button .submit-label{font:inherit}
+#contact-form button:disabled{cursor:wait;opacity:.7;transform:none}
+.contact-status[data-state="success"]{color:var(--gold)}
+.contact-status[data-state="error"]{color:#f1b8bc}

@@ -22,6 +22,10 @@ for (const page of pages) {
   const fullPath = path.join(root, page);
   const html = await readFile(fullPath, 'utf8');
   if (page === 'index.html') {
+    assert.match(html, /<form[^>]*id="contact-form"[^>]*action="\/api\/contact"[^>]*method="POST"/, 'Homepage: form submits to server delivery endpoint');
+    assert.match(html, /Send message/, 'Homepage: direct send action');
+    assert.match(html, /id="contact-status"[^>]*role="status"/, 'Homepage: accessible submission feedback');
+    assert.doesNotMatch(html, /Prepare project email|id="email-draft"|Opens a draft in your email app/, 'Homepage: no email-app requirement');
     assert.doesNotMatch(html, /id="journal"|NOTES FROM THE WORKBENCH/, 'Homepage: workbench notes section removed');
     assert.doesNotMatch(html, /class="eyebrow">\d+\s*\//, 'Homepage: section titles have no numeric prefix');
     assert.doesNotMatch(html, /data-project=|id="project-dialog"|id="work"/, 'Homepage: project gallery and dialog moved to Work');
@@ -92,4 +96,6 @@ if (production) {
   assert.match(await readFile(path.join(root, 'robots.txt'), 'utf8'), /Disallow: \//);
   assert.match(await readFile(path.join(root, '_headers'), 'utf8'), /X-Robots-Tag: noindex, nofollow/);
 }
+const routes = JSON.parse(await readFile(path.join(root, '_routes.json'), 'utf8'));
+assert.deepEqual(routes.include, ['/api/contact', '/api/contact/'], 'Only contact delivery invokes the server function');
 console.log(`PASS: ${pages.length} built pages; ${checked} local links/assets; exact introduction; heading/id checks; original logo and portrait; ${production ? 'production' : 'preview'} indexing policy.`);

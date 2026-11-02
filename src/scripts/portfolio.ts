@@ -1,4 +1,4 @@
-import { prepareProjectEmail } from '../lib/project-email';
+export {};
 
 function required<T extends Element>(selector: string): T {
   const element = document.querySelector<T>(selector);
@@ -13,31 +13,37 @@ document.querySelectorAll<HTMLAnchorElement>('[data-service]').forEach(link => {
   });
 });
 const form = required<HTMLFormElement>('#contact-form');
-const draftText = required<HTMLTextAreaElement>('#draft-text');
-const draftPanel = required<HTMLElement>('#email-draft');
-form.addEventListener('submit', event => {
+const contactStatus = required<HTMLElement>('#contact-status');
+const button = required<HTMLButtonElement>('#contact-form button[type="submit"]');
+const label = required<HTMLElement>('.submit-label');
+form.addEventListener('submit', async event => {
   event.preventDefault();
-  if (!form.reportValidity()) return;
+  if (button.disabled || !form.reportValidity()) return;
   const fields = new FormData(form);
-  const email = prepareProjectEmail({
-    name: String(fields.get('name') ?? ''),
-    email: String(fields.get('email') ?? ''),
-    service: String(fields.get('service') ?? ''),
-    message: String(fields.get('message') ?? ''),
-  });
-  if (!email) return;
-  draftText.value = email.draft;
-  draftPanel.hidden = false;
-  window.location.href = email.href;
-});
-const copyStatus = required<HTMLElement>('#copy-status');
-required<HTMLButtonElement>('#copy-draft').addEventListener('click', async () => {
+  const controls = Array.from(form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | HTMLButtonElement>('input, select, textarea, button'));
+  controls.forEach(control => { control.disabled = true; });
+  form.setAttribute('aria-busy', 'true');
+  contactStatus.textContent = 'Sending your message…';
+  contactStatus.dataset.state = 'pending';
+  label.textContent = 'Sending…';
   try {
-    await navigator.clipboard.writeText(draftText.value);
-    copyStatus.textContent = 'Copied.';
+    const response = await fetch(form.action, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(Object.fromEntries(fields)),
+      signal: AbortSignal.timeout(25000),
+    });
+    const result: unknown = await response.json();
+    if (!response.ok || !result || typeof result !== 'object' || !('ok' in result) || result.ok !== true) throw new Error('Message not sent');
+    form.reset();
+    contactStatus.textContent = 'Thanks! Your message has been sent. I’ll reply to the email address you provided.';
+    contactStatus.dataset.state = 'success';
   } catch {
-    draftText.focus();
-    draftText.select();
-    copyStatus.textContent = 'Selected—use your device’s Copy command.';
+    contactStatus.textContent = 'Your message could not be sent right now. Your details are still here—please try again shortly, or use the email link.';
+    contactStatus.dataset.state = 'error';
+  } finally {
+    controls.forEach(control => { control.disabled = false; });
+    form.setAttribute('aria-busy', 'false');
+    label.textContent = 'Send message';
   }
 });

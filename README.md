@@ -21,7 +21,7 @@ pnpm verify
 pnpm preview
 ```
 
-`check` checks Astro and TypeScript; `test` checks contact email encoding and blank input; `verify` checks all built pages, including CMS-generated blog routes, their local links and anchors, the exact approved introduction, original asset bytes, and preview indexing protections. Run `build` before `verify`.
+`check` checks Astro and TypeScript; `test` checks CMS boundaries and contact delivery validation, privacy, spam traps, and failure handling; `verify` checks all built pages, including CMS-generated blog routes, their local links and anchors, the exact approved introduction, original asset bytes, and preview indexing protections. Run `build` before `verify`.
 
 On this Windows machine, the bundled pnpm CLI is available through Node if `pnpm` is not on PATH:
 
@@ -44,7 +44,7 @@ The system CA option resolved the local registry certificate-chain error without
 - `src/pages/` defines `/`, `/work/`, `/blog/`, `/blog/welcome/`, and `/creations/`.
 - `src/layouts/BaseLayout.astro` shares document metadata, fonts/styles, and the skip link. `src/components/` contains the homepage sections, header, footer, and project dialog.
 - `src/data/projects.ts` contains typed project-detail copy, reused from the prototype. Published posts, projects, and services are now read from Sanity at build time; reviewed offline/seed content lives in `src/data/default-content.ts`.
-- `src/scripts/navigation.ts` handles the shared menu. `src/scripts/work.ts` handles accessible project dialogs and filters on `/work/`. `src/scripts/portfolio.ts` handles homepage service selection and the email-draft fallback. `src/lib/project-email.ts` creates the encoded draft without sending anything.
+- `src/scripts/navigation.ts` handles the shared menu. `src/scripts/work.ts` handles accessible project dialogs and filters on `/work/`. `src/scripts/portfolio.ts` handles homepage service selection and direct contact submission. `functions/api/contact.ts` validates inquiries and sends them through FormSubmit to the fixed business inbox; `public/_routes.json` limits server execution to that endpoint.
 - `public/assets/` preserves the original logo and portrait; `src/styles/global.css` reuses the prototype styling, including the mobile orbit-overflow fix.
 - The source of approval remains `design-preview/index.html`. Its introductory wording must match the built pages exactly. Do not rewrite it during CMS migration.
 
@@ -70,6 +70,6 @@ The Git-integrated Cloudflare Pages project `jakeardoincom` has been created. It
 
 Sanity is connected to the owner-approved Jake DevWorks project (`1n70ao73`), public dataset `production`. Studio schemas, published-only build queries, rich-text rendering, non-destructive seed import, and an editor-forwarding `/admin/` route are included. Studio is deployed at https://jakedevworks.sanity.studio/; authenticated editing and automated publish-triggered rebuilds still need verification. See [CMS-SETUP.md](CMS-SETUP.md) for exact status and commands.
 
-Contact opens a draft addressed to `jakedevworks@gmail.com`, with a manual copy fallback. The page uses “Email Jake DevWorks” labels and omits the recipient from the visible fallback text. The business address is still present in the mailto links and client code. This flow has no server endpoint, delivery provider, spam checks, or persistent inquiry storage. Decide whether to keep it or replace it with server-side delivery before launch. The local browser security policy blocked testing the external email-app handoff; it was not bypassed.
+Contact submits to a same-origin Cloudflare Pages Function and delivers through the owner-selected FormSubmit service to `jakedevworks@gmail.com`. Visitors receive an on-page confirmation without opening an email app; failures keep their input available. Native form posts also work without JavaScript. The optional “Email Jake DevWorks” link remains available without printing the address. The recipient is fixed server-side; there is no sender credential in the website. See [CONTACT-SETUP.md](CONTACT-SETUP.md) for activation, tests, service boundaries, and delivery status. The static `design-preview/` reference retains its older offline email-draft demonstration and is not an email-delivery test.
 
 Owner review of the drafted article, résumé-derived background, client names, and project imagery is still needed as described in the original prototype handoff. Google Fonts remains an external request with system-font fallback.
