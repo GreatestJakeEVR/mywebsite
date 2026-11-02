@@ -11,7 +11,7 @@ test('delivers validated inquiry only to the fixed owner, preserving message and
   let calls = 0;
   const response = await handleContact(request({ ...inquiry, _cc: 'attacker@example.test', _webhook: 'https://example.test/' }), async (url, options) => {
     calls++;
-    assert.equal(url, 'https://formsubmit.co/ajax/jakedevworks@gmail.com');
+    assert.equal(url, 'https://formsubmit.co/ajax/5b52001950c0cc4c66cae8abe3c605dd');
     assert.equal(options.redirect, 'manual', 'Inquiry data must not follow a provider redirect');
     const body = JSON.parse(options.body);
     assert.equal(body.message, inquiry.message.trim());

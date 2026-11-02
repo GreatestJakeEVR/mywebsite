@@ -153,3 +153,9 @@ Real FormSubmit requests from this machine timed out; a local runtime submission
 ### Contact runtime follow-up
 
 The first preview’s outbound call exposed a Workers-specific incompatibility: the Fetch-standard redirect mode error is not supported at the edge. A local runtime trace identified the rejected request option. Replaced it with manual mode and retained the existing non-2xx rejection, so redirects are not followed and form data cannot be forwarded to another destination. Removed the temporary sanitized local diagnostic before committing. Added regression coverage for the manual redirect policy and a 302 provider response. All 9 tests and whitespace checks pass. The local runtime now attempts delivery and returns a timed-out network error after 15 seconds; the corrected hosted preview still needs provider/activation/inbox verification.
+
+### Recipient alias and custom-domain handoff
+
+The owner supplied FormSubmit’s opaque recipient alias. Replaced the email address in the provider URL with that exact alias and updated the fixed-destination test. The owner reports that the activation link itself times out; activation remains unconfirmed. A direct alias test still timed out after 40 seconds. The 9 tests, Worker compilation, and whitespace checks pass; actual delivery remains unverified and master keeps the existing form.
+
+For the reported missing www site, public DNS confirmed GoDaddy nameservers and the previous www A values 151.101.1.195/151.101.65.195. HTTPS still redirected to the old apex homepage; the Pages URL serves the new site. The existing Pages project had no custom domains. Associated www.jakeardoin.com through Cloudflare’s API; it returned initializing/pending verification. Prepared DOMAIN-SETUP.md with the exact GoDaddy CNAME replacement, scope, prior records, and rollback. No GoDaddy record or nameserver was changed. Domain activation awaits the owner’s DNS update and subsequent public HTTPS verification.

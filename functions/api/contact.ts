@@ -76,7 +76,7 @@ export async function handleContact(request: Request, fetcher: typeof fetch = fe
 
   let failureReason = 'network';
   try {
-    const response = await fetcher('https://formsubmit.co/ajax/jakedevworks@gmail.com', {
+    const response = await fetcher('https://formsubmit.co/ajax/5b52001950c0cc4c66cae8abe3c605dd', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json', Referer: canonical },
       signal: AbortSignal.timeout(15000),

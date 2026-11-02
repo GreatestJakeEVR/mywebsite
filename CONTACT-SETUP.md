@@ -1,6 +1,6 @@
 # Contact form delivery
 
-The owner selected [FormSubmit](https://formsubmit.co/) to deliver inquiries to `jakedevworks@gmail.com` without requiring visitors to use an email app. The visible form does not print the recipient address.
+The owner selected [FormSubmit](https://formsubmit.co/) to deliver inquiries to `jakedevworks@gmail.com` without requiring visitors to use an email app. The handler uses the opaque recipient alias supplied in the owner’s FormSubmit email instead of putting the inbox address in the provider endpoint. The visible form does not print the recipient address.
 
 ## Flow
 
