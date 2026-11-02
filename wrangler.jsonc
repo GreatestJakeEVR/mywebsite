@@ -2,5 +2,12 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "jakeardoincom",
   "pages_build_output_dir": "./dist",
-  "compatibility_date": "2026-11-02"
+  "compatibility_date": "2026-11-02",
+  "vars": {
+    "NODE_VERSION": "24",
+    "SANITY_PROJECT_ID": "1n70ao73",
+    "SANITY_DATASET": "production",
+    "SANITY_STUDIO_URL": "https://jakedevworks.sanity.studio",
+    "REQUIRE_SANITY": "true"
+  }
 }
