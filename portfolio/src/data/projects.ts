@@ -25,6 +25,16 @@ export const projects: Record<string, ProjectDetail> = {
     ],
     skills: ['Java & graphical interfaces', 'MySQL', 'Hardware integration', 'Technical documentation']
   },
+  relief: {
+    title: 'Relief Telemed vaccination platform',
+    category: 'RELIEF TELEMED / COVID-19 VACCINATION EVENTS',
+    paragraphs: [
+      'I worked with Relief Telemed on a registration and documentation platform supporting its COVID-19 vaccination events in Baton Rouge.',
+      'I developed the API with Python and Django, backed by PostgreSQL, and worked on the main web application using React, TypeScript, and JavaScript to handle registration and vaccination documentation.',
+      'I also managed continuous integration and deployment with CircleCI and hosted the application on Aptible.'
+    ],
+    skills: ['Python & Django API', 'PostgreSQL', 'React, TypeScript & JavaScript', 'CircleCI CI/CD', 'Aptible hosting']
+  },
   clinic: {
     title: 'Helping a clinic get found', category: 'CLIENT WORK / ONLINE PRESENCE',
     paragraphs: [

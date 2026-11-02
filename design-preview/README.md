@@ -19,7 +19,7 @@ Open `http://127.0.0.1:4173`. Verify with `node --check app.js` and `node verify
 - Charcoal, purple, gold, and white design; responsive navigation and reduced-motion support.
 - User-approved introduction, unchanged.
 - Services for software/apps, business websites/online presence, and 3D design/printing.
-- Four project summaries drawn from the uploaded résumé and existing repository, with filter controls and accessible project dialogs.
+- Five project summaries drawn from the uploaded résumé, existing repository, and owner's account of the Relief Telemed work, with filter controls and accessible project dialogs.
 - Existing JA monogram and portrait; abstract project artwork represents the subject rather than screenshots of finished client websites.
 - About section with accurately described NASA internship, LSU instruction, and education.
 - A newly drafted introductory blog article for owner review.
