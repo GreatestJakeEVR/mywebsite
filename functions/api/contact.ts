@@ -80,7 +80,7 @@ export async function handleContact(request: Request, fetcher: typeof fetch = fe
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json', Referer: canonical },
       signal: AbortSignal.timeout(15000),
-      redirect: 'error',
+      redirect: 'manual',
       // Forward only approved fields. Visitors cannot set recipients, CC, webhooks, or redirects.
       body: JSON.stringify({ name, email, service, message, _replyto: email, _subject: `Jake DevWorks inquiry: ${service}`, _template: 'table', _url: canonical }),
     });

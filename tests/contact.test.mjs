@@ -12,6 +12,7 @@ test('delivers validated inquiry only to the fixed owner, preserving message and
   const response = await handleContact(request({ ...inquiry, _cc: 'attacker@example.test', _webhook: 'https://example.test/' }), async (url, options) => {
     calls++;
     assert.equal(url, 'https://formsubmit.co/ajax/jakedevworks@gmail.com');
+    assert.equal(options.redirect, 'manual', 'Inquiry data must not follow a provider redirect');
     const body = JSON.parse(options.body);
     assert.equal(body.message, inquiry.message.trim());
     assert.equal(body.name, 'Example Client');
@@ -47,7 +48,7 @@ test('caps streamed payload size, handles malformed input, and drops honeypot sp
 });
 
 test('does not report delivery for HTTP errors, string false, activation, or network failures', async () => {
-  for (const upstream of [() => Promise.resolve(Response.json({ success: 'false', message: 'Activation required' })), () => Promise.resolve(Response.json({ success: true, message: 'Please activate your form' })), () => Promise.resolve(new Response('Unavailable', { status: 503 })), () => Promise.resolve(new Response('<html>Challenge</html>')), () => Promise.reject(new Error('Network failure'))]) {
+  for (const upstream of [() => Promise.resolve(Response.json({ success: 'false', message: 'Activation required' })), () => Promise.resolve(Response.json({ success: true, message: 'Please activate your form' })), () => Promise.resolve(new Response(null, { status: 302, headers: { Location: 'https://other.example.test/' } })), () => Promise.resolve(new Response('Unavailable', { status: 503 })), () => Promise.resolve(new Response('<html>Challenge</html>')), () => Promise.reject(new Error('Network failure'))]) {
     const response = await handleContact(request(), upstream);
     assert.equal(response.status, 503);
     assert.equal((await response.json()).ok, false);
