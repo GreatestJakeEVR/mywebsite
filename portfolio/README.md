@@ -53,7 +53,9 @@ The system CA option resolved the local registry certificate-chain error without
 
 `src/components/BlogWelcome.astro` introduces the blog. `WelcomePost.astro` is reused on the homepage and blog landing page; the existing welcome article remains at `/blog/welcome/`.
 
-`src/pages/creations/index.astro` is a separate home for future project photos, finished prints, and design notes. It currently explains that the collection is taking shape and marks HeyGears work as coming later. No actual creation photos, project inventory, upload form, or CMS editor is connected yet. Replace the introductory collection note with owner-supplied work as it becomes available.
+`src/pages/creations/index.astro` shows the owner’s trash bag dispenser, printed business card, Mario-inspired question-block light (two views), and geometric tiger magnetic sticker. It also describes planned personalized full-color figurines and custom T-shirts, with the supplied Team Albedo shirt mockup labeled as a personal concept. HeyGears, coloring, and ordering workflows are still in development; the page offers inquiries rather than checkout. No CMS editor or inventory system is connected.
+
+`node scripts/convert-creation-photos.mjs SOURCE_DIRECTORY FULL_SIZE_PNG_DIRECTORY SHIRT_CONCEPT_PATH` creates pixel-checked full-size PNG conversions of the five supplied JPGs, crops only the shirt half of the supplied 1536 × 1024 concept, and writes smaller website PNGs plus WebP alternatives into both preview asset directories. The original uploads are unchanged; metadata is omitted from the generated files. Each picture uses a WebP source with a PNG fallback. Private CAD and technique files stay in the private 3D-print repository, outside the public website.
 
 The new blog/creations pages and updated article are also mirrored as static HTML in `../design-preview/`; they run without package installation.
 

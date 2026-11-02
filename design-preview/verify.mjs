@@ -19,7 +19,7 @@ for (const page of pages) {
   assert.equal((html.match(/<h1[ >]/g) || []).length,1,`${page}: exactly one primary heading`);
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
   assert.equal(ids.length,new Set(ids).size,`${page}: unique HTML ids`);
-  for (const [,attribute,value] of html.matchAll(/\b(href|src)="([^"]+)"/g)) {
+  for (const [,attribute,value] of html.matchAll(/\b(href|src|srcset)="([^"]+)"/g)) {
     if (/^(https?:|mailto:|data:)/.test(value)) continue;
     const [pathname,fragment] = value.split('#');
     let destination = pathname ? path.resolve(path.dirname(fullPath),pathname) : fullPath;

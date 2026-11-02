@@ -12,6 +12,16 @@ let checked = 0;
 for (const page of pages) {
   const fullPath = path.join(root, page);
   const html = await readFile(fullPath, 'utf8');
+  if (page === 'creations/index.html') {
+    for (const id of ['trash-bag-dispenser', 'printed-business-card', 'mario-block-lights', 'geometric-tiger', 'heygears', 'custom-shirts']) {
+      assert.ok(html.includes(`id="${id}"`), `Creations: ${id} section exists`);
+    }
+    assert.equal((html.match(/<img src="\/assets\/creations\//g) ?? []).length, 6, 'Creations: six supplied project photos');
+    assert.match(html, /COMING LATER/, 'Future services retain their planned status');
+    assert.match(html, /LSU pride/);
+    assert.match(html, /full-color 3D/);
+    assert.match(html, /plan to make for myself/);
+  }
   assert.doesNotMatch(html.replace(/<[^>]*>/g, ''), /[\w.+-]+@gmail\.com/i, `${page}: no owner email address displayed`);
   for (const [, recipient] of html.matchAll(/href="mailto:([^"?]+)[^"]*"/g)) {
     assert.equal(recipient, 'jakedevworks@gmail.com', `${page}: business contact recipient`);
@@ -21,7 +31,7 @@ for (const page of pages) {
   assert.equal((html.match(/<h1[ >]/g) ?? []).length, 1, `${page}: one primary heading`);
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
   assert.equal(ids.length, new Set(ids).size, `${page}: unique ids`);
-  for (const [, value] of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
+  for (const [, value] of html.matchAll(/\b(?:href|src|srcset)="([^"]+)"/g)) {
     if (/^(https?:|mailto:|data:)/.test(value)) continue;
     const [pathname, fragment] = value.split('#');
     let destination = pathname
