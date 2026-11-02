@@ -6,6 +6,7 @@
 - Project: Jake DevWorks (`1n70ao73`).
 - Public dataset: `production`, explicitly approved by the owner.
 - Imported with `createIfNotExists`: the reviewed welcome post, five work projects, and three services. Existing documents are not overwritten.
+- Hosted Studio: https://jakedevworks.sanity.studio/ (application `l82idbbpf83fh8c5dy0bse2c`, recorded in `sanity.cli.ts`).
 - Sanity and Cloudflare CLIs are authenticated locally. Credentials remain outside this repository. Website reads require no API token.
 
 ## Architecture and editing
@@ -34,11 +35,11 @@ pnpm studio:build
 
 ## Still required to publish
 
-1. Deploy Studio to an owner-controlled Sanity hostname and verify its authenticated editor. Set that actual URL in `SANITY_STUDIO_URL`; `/admin/` forwards there and remains unindexed.
-2. Configure a Git-integrated Cloudflare Pages project for `GreatestJakeEVR/mywebsite`: root `portfolio`, Node 24, pnpm 11.25.0, output `dist`, build command `pnpm build:production`. Set the Sanity identifiers and actual Studio URL as build variables. A Direct Upload Pages project cannot later switch to Git integration, so do not create that kind for this workflow.
+1. Studio is deployed at https://jakedevworks.sanity.studio/. Verify its authenticated editor and set that address in `SANITY_STUDIO_URL`; `/admin/` forwards there and remains unindexed.
+2. Configure the Git-integrated Cloudflare Pages project `jakeardoincom` for `GreatestJakeEVR/mywebsite`, production branch `master`: root `portfolio`, Node 24, pnpm 11.25.0, output `dist`, build command `pnpm build:production`. `wrangler.jsonc` records the matching project name and output directory. Set the Sanity identifiers and actual Studio URL as build variables. A Direct Upload Pages project cannot later switch to Git integration, so do not create that kind for this workflow.
 3. Configure a Pages deploy hook and a Sanity webhook for published `post`, `project`, and `service` changes, excluding drafts/releases. Keep the deploy-hook URL secret and out of this repository. Verify publishing, editing, and unpublishing all rebuild the site. Future-dated posts require a rebuild at or after their publication date.
 4. Run `pnpm build:production` and `node scripts/verify-build.mjs --production`. The production command generates canonical URLs, sitemap, indexing policy, headers, and public build metadata containing only project identifiers/editor origin. Ordinary previews remain unindexed.
 5. Verify Pages before custom-domain cutover. DNS currently uses GoDaddy nameservers; the older homepage is still live. Associate `www.jakeardoin.com` with Pages before setting its GoDaddy CNAME. Apex Pages hosting requires Cloudflare nameservers; alternatively use a provider-managed apex-to-www redirect. Preserve existing verification/mail records and save previous routing for rollback.
 6. Verify HTTPS, all routes, CMS publishing, and rollback. Keep the existing Django application/cookbook available until their migration is decided; this change does not move them.
 
-Checkpoint: the CMS is connected/imported, and local site/Studio builds pass. Studio and the new site are not yet deployed, automated rebuilds are not configured, and DNS has not changed. Native Chrome automation stopped because it could not verify the current URL; no dashboard or DNS mutations were made through it.
+Current handoff: Studio is deployed and the real-CMS production build passes. `master` is the production source requested by the owner, and `jakeardoincom` is the Cloudflare Pages project name. Cloudflare publication, automatic rebuilds, authenticated editor behavior, and DNS cutover still need verification. No domain routing has been changed by these repository updates.
