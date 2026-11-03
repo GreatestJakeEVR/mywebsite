@@ -54,6 +54,8 @@ for (const page of pages) {
     assert.match(html, /COMING LATER/, 'Future services retain their planned status');
     assert.match(html, /LSU pride/);
     assert.match(html, /full-color 3D/);
+    assert.match(html, /COMING SOON \/ FULL COLOR 3D CREATIONS/, 'Creations: customer-facing full-color heading');
+    assert.doesNotMatch(html.replace(/<[^>]*>/g, ''), /HeyGears/i, 'Creations: describe creations without naming the machine');
     assert.match(html, /plan to make for myself/);
   }
   const visibleText = html.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/g, '').replace(/<[^>]*>/g, '');
