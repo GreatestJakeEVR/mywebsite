@@ -1,3 +1,6 @@
+---
+import { contactDelivery } from '../lib/contact';
+---
 <section class="contact-section section" id="contact" aria-labelledby="contact-title">
   <div class="wrap contact-grid">
     <div class="contact-copy">
@@ -7,14 +10,17 @@
       <a class="email-link" href="mailto:jakedevworks@gmail.com">Email Jake DevWorks <span aria-hidden="true">↗</span></a>
       <p class="contact-location">Baton Rouge, Louisiana</p>
     </div>
-    <form id="contact-form" action="/api/contact" method="POST" aria-describedby="contact-note contact-status">
+    <form id="contact-form" action={contactDelivery.action} method="POST" aria-describedby="contact-note contact-status">
+      <input type="hidden" name="_subject" value={contactDelivery.subject}>
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_url" value={contactDelivery.url}>
       <div class="form-grid">
         <label>Your name <input name="name" autocomplete="name" required maxlength="100" placeholder="How should I address you?"></label>
         <label>Email address <input name="email" type="email" autocomplete="email" required maxlength="200" placeholder="you@example.com"></label>
       </div>
       <label>What can I help with? <select name="service" id="service"><option>Software & apps</option><option>Websites & online presence</option><option>3D design & printing</option><option>A bit of everything / not sure yet</option></select></label>
       <label>Tell me about your project <textarea name="message" rows="5" required maxlength="5000" placeholder="What would you like to build? Include any goals, dimensions, timing, or budget you have in mind."></textarea></label>
-      <div class="contact-honeypot" aria-hidden="true"><label>Leave this field empty <input name="website" tabindex="-1" autocomplete="off" maxlength="200"></label></div>
+      <div class="contact-honeypot" aria-hidden="true"><label>Leave this field empty <input name="_honey" tabindex="-1" autocomplete="off" maxlength="200"></label></div>
       <button class="button button-gold" type="submit"><span class="submit-label">Send message</span> <span aria-hidden="true">↗</span></button>
       <p class="form-note" id="contact-note">Your message goes directly to Jake DevWorks—no email app needed. Delivered by <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener noreferrer">FormSubmit</a>.</p>
       <p class="form-note contact-status" id="contact-status" role="status" aria-live="polite" aria-atomic="true"></p>

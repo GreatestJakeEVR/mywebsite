@@ -1,4 +1,4 @@
-export {};
+import { submitContact } from '../lib/contact';
 
 function required<T extends Element>(selector: string): T {
   const element = document.querySelector<T>(selector);
@@ -27,19 +27,12 @@ form.addEventListener('submit', async event => {
   contactStatus.dataset.state = 'pending';
   label.textContent = 'Sending…';
   try {
-    const response = await fetch(form.action, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(Object.fromEntries(fields)),
-      signal: AbortSignal.timeout(25000),
-    });
-    const result: unknown = await response.json();
-    if (!response.ok || !result || typeof result !== 'object' || !('ok' in result) || result.ok !== true) throw new Error('Message not sent');
+    await submitContact(fields);
     form.reset();
     contactStatus.textContent = 'Thanks! Your message has been sent. I’ll reply to the email address you provided.';
     contactStatus.dataset.state = 'success';
   } catch {
-    contactStatus.textContent = 'Your message could not be sent right now. Your details are still here—please try again shortly, or use the email link.';
+    contactStatus.textContent = 'We couldn’t confirm that your message was sent. Your details are still here—please wait a moment before trying again, or use the email link.';
     contactStatus.dataset.state = 'error';
   } finally {
     controls.forEach(control => { control.disabled = false; });
