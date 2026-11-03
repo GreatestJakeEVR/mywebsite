@@ -75,6 +75,7 @@ export async function handleContact(request: Request, fetcher: typeof fetch = fe
   }
 
   let failureReason = 'network';
+  let providerStatus: number | undefined;
   try {
     const response = await fetcher('https://formsubmit.co/ajax/5b52001950c0cc4c66cae8abe3c605dd', {
       method: 'POST',
@@ -84,6 +85,7 @@ export async function handleContact(request: Request, fetcher: typeof fetch = fe
       // Forward only approved fields. Visitors cannot set recipients, CC, webhooks, or redirects.
       body: JSON.stringify({ name, email, service, message, _replyto: email, _subject: `Jake DevWorks inquiry: ${service}`, _template: 'table', _url: canonical }),
     });
+    providerStatus = response.status;
     failureReason = 'provider_http';
     if (!response.ok) throw new Error('Provider HTTP error');
     failureReason = 'provider_response';
@@ -100,7 +102,7 @@ export async function handleContact(request: Request, fetcher: typeof fetch = fe
     return reply(request, 200, sentMessage);
   } catch {
     // Never log visitor details or provider response bodies.
-    console.warn(JSON.stringify({ event: 'contact_delivery_failed', reason: failureReason }));
+    console.warn(JSON.stringify({ event: 'contact_delivery_failed', reason: failureReason, providerStatus }));
     return reply(request, 503, unavailableMessage);
   }
 }

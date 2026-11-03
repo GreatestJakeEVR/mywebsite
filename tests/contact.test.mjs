@@ -65,3 +65,16 @@ test('supports normal HTML form posts and returns a safe confirmation without Ja
   assert.match(html, /Message sent/);
   assert.ok(!html.includes(inquiry.email.trim()));
 });
+
+test('logs only the provider HTTP status and failure category for delivery diagnosis', async () => {
+  const entries = [];
+  const originalWarn = console.warn;
+  console.warn = value => entries.push(JSON.parse(value));
+  try {
+    const response = await handleContact(request(), async () => new Response('Private provider details', { status: 403 }));
+    assert.equal(response.status, 503);
+    assert.deepEqual(entries, [{ event: 'contact_delivery_failed', reason: 'provider_http', providerStatus: 403 }]);
+  } finally {
+    console.warn = originalWarn;
+  }
+});
