@@ -22,9 +22,13 @@ for (const page of pages) {
   const fullPath = path.join(root, page);
   const html = await readFile(fullPath, 'utf8');
   if (page === 'index.html') {
-    assert.match(html, /<form[^>]*id="contact-form"[^>]*action="https:\/\/formsubmit\.co\/5b52001950c0cc4c66cae8abe3c605dd"[^>]*method="POST"/, 'Homepage: native form submits directly to the approved provider alias');
-    assert.match(html, /name="_honey"/, 'Homepage: provider-supported spam trap');
-    assert.match(html, /name="_subject" value="Jake DevWorks website inquiry"/, 'Homepage: fixed inquiry subject');
+    assert.match(html, /<form[^>]*id="contact-form"[^>]*action="https:\/\/api\.web3forms\.com\/submit"[^>]*method="POST"/, 'Homepage: native form submits directly to Web3Forms');
+    assert.match(html, /name="access_key" value="0af992cd-70a7-4bef-ac77-45e7a8e07a37"/, 'Homepage: approved public form key');
+    assert.match(html, /type="checkbox" name="botcheck"/, 'Homepage: provider-supported spam trap');
+    assert.match(html, /name="subject" value="Jake DevWorks website inquiry"/, 'Homepage: fixed inquiry subject');
+    assert.match(html, /name="redirect" value="https:\/\/web3forms\.com\/success"/, 'Homepage: no-JavaScript confirmation destination');
+    assert.match(html, /href="https:\/\/web3forms\.com\/privacy"/, 'Homepage: current provider privacy information');
+    assert.doesNotMatch(html, /formsubmit\.co|FormSubmit/, 'Homepage: former delivery provider removed');
     assert.match(html, /Send message/, 'Homepage: direct send action');
     assert.match(html, /id="contact-status"[^>]*role="status"/, 'Homepage: accessible submission feedback');
     assert.doesNotMatch(html, /Prepare project email|id="email-draft"|Opens a draft in your email app/, 'Homepage: no email-app requirement');
@@ -106,5 +110,5 @@ const scripts = [
   ...[...homepage.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].map(match => match[1]),
   ...await Promise.all(assets.filter(asset => asset.endsWith('.js')).map(asset => readFile(path.join(root, '_astro', asset), 'utf8'))),
 ];
-assert.ok(scripts.some(script => script.includes('formsubmit.co/ajax/') && script.includes('5b52001950c0cc4c66cae8abe3c605dd')), 'Homepage bundle includes direct provider delivery');
+assert.ok(scripts.some(script => script.includes('api.web3forms.com/submit') && script.includes('0af992cd-70a7-4bef-ac77-45e7a8e07a37')), 'Homepage bundle includes direct Web3Forms delivery');
 console.log(`PASS: ${pages.length} built pages; ${checked} local links/assets; exact introduction; heading/id checks; original logo and portrait; ${production ? 'production' : 'preview'} indexing policy.`);

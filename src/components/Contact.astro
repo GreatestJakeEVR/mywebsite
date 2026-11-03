@@ -11,18 +11,19 @@ import { contactDelivery } from '../lib/contact';
       <p class="contact-location">Baton Rouge, Louisiana</p>
     </div>
     <form id="contact-form" action={contactDelivery.action} method="POST" aria-describedby="contact-note contact-status">
-      <input type="hidden" name="_subject" value={contactDelivery.subject}>
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_url" value={contactDelivery.url}>
+      <input type="hidden" name="access_key" value={contactDelivery.accessKey}>
+      <input type="hidden" name="subject" value={contactDelivery.subject}>
+      <input type="hidden" name="from_name" value={contactDelivery.fromName}>
+      <input type="hidden" name="redirect" value={contactDelivery.nativeRedirect}>
       <div class="form-grid">
         <label>Your name <input name="name" autocomplete="name" required maxlength="100" placeholder="How should I address you?"></label>
         <label>Email address <input name="email" type="email" autocomplete="email" required maxlength="200" placeholder="you@example.com"></label>
       </div>
       <label>What can I help with? <select name="service" id="service"><option>Software & apps</option><option>Websites & online presence</option><option>3D design & printing</option><option>A bit of everything / not sure yet</option></select></label>
       <label>Tell me about your project <textarea name="message" rows="5" required maxlength="5000" placeholder="What would you like to build? Include any goals, dimensions, timing, or budget you have in mind."></textarea></label>
-      <div class="contact-honeypot" aria-hidden="true"><label>Leave this field empty <input name="_honey" tabindex="-1" autocomplete="off" maxlength="200"></label></div>
+      <div class="contact-honeypot" aria-hidden="true"><label>Leave this unchecked <input type="checkbox" name="botcheck" value="true" tabindex="-1" autocomplete="off"></label></div>
       <button class="button button-gold" type="submit"><span class="submit-label">Send message</span> <span aria-hidden="true">↗</span></button>
-      <p class="form-note" id="contact-note">Your message goes directly to Jake DevWorks—no email app needed. Delivered by <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener noreferrer">FormSubmit</a>.</p>
+      <p class="form-note" id="contact-note">Your message goes directly to Jake DevWorks—no email app needed. Delivered by <a href="https://web3forms.com/privacy" target="_blank" rel="noopener noreferrer">Web3Forms</a>.</p>
       <p class="form-note contact-status" id="contact-status" role="status" aria-live="polite" aria-atomic="true"></p>
     </form>
   </div>
